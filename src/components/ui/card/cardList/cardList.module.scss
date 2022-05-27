@@ -1,0 +1,57 @@
+@import "../../../../styles/variables";
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixin";
+@import "../../../../styles/default";
+
+.card {
+  @include Text();
+  font-family: $font-number;
+  font-size: 0.8rem;
+  color: $body-color;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  // background-color: $button-bg;
+  &:nth-child(2n + 1) {
+    background: #ff7551;
+  }
+  &:nth-child(2n) {
+    background: #32a7e2;
+  }
+  &:nth-child(2n + 3) {
+    background: #6c5ecf;
+  }
+  &:hover {
+    transition: 0.1s all ease-in-out;
+    transform: scale(1.03);
+  }
+
+  a {
+    padding: 2% 3%;
+    width: 100%;
+    text-decoration: none;
+    color: $white;
+    &:hover {
+      color: $white;
+    }
+
+    @include flex();
+
+    ul {
+      @include flex();
+      justify-content: space-between;
+      width: 100%;
+      li {
+        width: 15%;
+        &:nth-of-type(2) {
+          width: 7%;
+        }
+        &:nth-of-type(3) {
+          width: 15%;
+        }
+        &:last-of-type {
+          width: 25%;
+        }
+      }
+    }
+  }
+}

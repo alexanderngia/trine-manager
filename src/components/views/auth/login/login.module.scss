@@ -1,0 +1,107 @@
+@import "../../../../styles/variables";
+@import "../../../../styles/responsive";
+@import "../../../../styles/mixin";
+.root {
+  width: 100%;
+  @include flex();
+}
+.login-page {
+  width: 360px;
+  margin: auto;
+  h1 {
+    margin-bottom: 30px;
+    font-size: 2rem;
+    font-family: $font-head;
+  }
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: $white;
+  max-width: 360px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  input {
+    font-family: $font-p;
+    outline: 0;
+    background: $white;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+  button {
+    font-family: $font-p;
+    text-transform: uppercase;
+    outline: 0;
+    background: $black-banner;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: $white;
+    font-size: 14px;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    &:hover,
+    &:active,
+    &:focus {
+      background: $black-head;
+    }
+  }
+  .message {
+    margin: 15px 0 0;
+    color: $black-hover;
+    font-size: 12px;
+    a {
+      color: $black-p;
+      text-decoration: none;
+    }
+  }
+  .register-form {
+    display: none;
+  }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  .info {
+    margin: 50px auto;
+    text-align: center;
+    h1 {
+      margin: 0 0 15px;
+      padding: 0;
+      font-size: 36px;
+      font-weight: 300;
+      color: #1a1a1a;
+    }
+    span {
+      color: #4d4d4d;
+      font-size: 12px;
+      a {
+        color: #000000;
+        text-decoration: none;
+      }
+      .fa {
+        color: #ef3b3a;
+      }
+    }
+  }
+}
+
+.errMessage {
+  margin-bottom: 15px;
+  color: red;
+  text-align: left;
+}

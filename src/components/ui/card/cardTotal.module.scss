@@ -1,0 +1,57 @@
+@import "../../../styles/variables";
+@import "../../../styles/responsive";
+@import "../../../styles/mixin";
+@import "../../../styles/default";
+
+.root {
+  @include flex();
+  padding: 30px 25px;
+  background-color: $button-bg;
+  border-radius: 10px;
+  font-family: $font-p;
+  width: 20%;
+  max-width: 230px;
+  cursor: pointer;
+  &:nth-child(2n + 1) {
+    background: #ff7551;
+  }
+  &:nth-child(2n) {
+    background: #32a7e2;
+  }
+  &:nth-child(2n + 3) {
+    background: #03bd22;
+  }
+  &:nth-child(2n + 4) {
+    background: #6c5ecf;
+  }
+
+  .icon {
+    font-size: 30px;
+    margin-right: 30px;
+    @include desktop-lg {
+      margin-right: 50px;
+    }
+    @include desktop-l {
+      margin-right: 30px;
+    }
+    @include desktop {
+      margin-right: 25px;
+    }
+  }
+  .data {
+    @include flex();
+    flex-direction: column;
+    justify-content: space-between;
+    height: 40px;
+    align-items: flex-start;
+    .total {
+      font-family: $font-number;
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
+    .title {
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+  }
+}

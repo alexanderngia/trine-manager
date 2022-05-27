@@ -1,0 +1,13 @@
+@import "./styles/default";
+@import "./styles/mixin";
+@import "./styles/responsive";
+@import "./styles/variables";
+
+body {
+  margin: 0;
+  font-family: $font-p;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
