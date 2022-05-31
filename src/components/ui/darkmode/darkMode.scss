@@ -1,34 +1,39 @@
 @import "../../../styles/variables";
 @import "../../../styles/responsive";
 @import "../../../styles/mixin";
+
 .root {
   height: 50px;
   @include flex();
   justify-content: flex-start;
-  padding-left: 8px;
 }
-body.dark {
-  background-color: #292c35;
-}
+
 .checkbox {
-  opacity: 0;
-  position: absolute;
+  // opacity: 0;
+  // position: relative;
+  display: none;
 }
 
 .label {
   width: 50px;
   height: 26px;
-  background-color: #111;
+  background-color: $button-bg;
   display: flex;
   border-radius: 50px;
   align-items: center;
   justify-content: space-between;
   padding: 5px;
   position: relative;
-  transform: scale(1.3);
   cursor: pointer;
+
+  @include light {
+    background-color: $light-second;
+  }
   span {
     color: $white;
+    @include light {
+      color: $light-primary;
+    }
   }
 }
 
@@ -45,6 +50,7 @@ body.dark {
 }
 
 /*  target the elemenent after the label*/
+
 .checkbox:checked + .label .ball {
   transform: translateX(24px);
 }

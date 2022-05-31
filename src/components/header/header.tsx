@@ -57,8 +57,8 @@ const Header: React.FC<HeaderProps> = (props) => {
             </svg>
           </li>
           <li>
-            <ul className={styles["menu-profile"]}>
-              {profile && (
+            {profile && (
+              <ul className={styles["menu-profile"]}>
                 <span>
                   {React.Children.toArray(
                     menuUser.map((profile) => {
@@ -82,8 +82,8 @@ const Header: React.FC<HeaderProps> = (props) => {
                     </div>
                   </li>
                 </span>
-              )}
-            </ul>
+              </ul>
+            )}
           </li>
         </ul>
 

@@ -1,9 +1,8 @@
 @import "../../styles/variables";
 @import "../../styles/responsive";
 @import "../../styles/mixin";
-@import "../../styles/default";
 
-.sidebar {
+.root {
   width: 22%;
   height: 100%;
   padding: 30px;
@@ -14,6 +13,11 @@
   overflow-y: auto;
   overflow-x: hidden;
   font-family: $font-p;
+  background-color: $side-bar;
+  border-radius: 20px;
+  @include light {
+    background-color: $ligth-theme-bg;
+  }
   @include desktop {
     width: 27%;
   }
@@ -22,56 +26,35 @@
     display: none;
     width: 30px;
     height: 30px;
-    background-color: #22b07d;
     flex-shrink: 0;
-    color: #fff;
+    // color: #fff;
     align-items: center;
     border-radius: 50%;
     justify-content: center;
 
     &-expand {
       text-decoration: none;
-      color: #fff;
+      color: $white;
       font-size: 19px;
       font-weight: 600;
       line-height: 34px;
       position: sticky;
       top: 0;
+      @include light {
+        color: $light-second;
+      }
       &:before {
         content: "";
         position: absolute;
         top: -30px;
         left: 0;
-        background: $theme-bg;
         width: 200px;
         height: 70px;
         z-index: -1;
       }
     }
   }
-  &-link {
-    &:hover,
-    &.is-active {
-      color: #fff;
-      font-weight: 600;
 
-      &:nth-child(2n + 1) {
-        .icon {
-          background: #ff7551;
-        }
-      }
-      &:nth-child(2n) {
-        .icon {
-          background: #32a7e2;
-        }
-      }
-      &:nth-child(2n + 3) {
-        .icon {
-          background: #6c5ecf;
-        }
-      }
-    }
-  }
   &.collapse {
     width: 90px;
     border-right: 1px solid $border-color;
@@ -103,67 +86,173 @@
   }
 }
 
-.side-menu {
-  display: flex;
-  flex-direction: column;
-  a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: $body-color;
-    & + a {
-      margin-top: 26px;
-    }
+.wrapper {
+  border-bottom: 1px solid $border-color;
+  padding: 36px 0;
+  width: 90%;
+  & + & {
+    border-bottom: none;
   }
-  .icon {
-    padding: 8px;
-    border-radius: 10px;
-    background-color: $button-bg;
-    flex-shrink: 0;
-    margin-right: 16px;
-    &:hover {
-      color: #fff;
-    }
-    ion-icon {
-      font-size: 30px;
+
+  .side-menu {
+    display: flex;
+    flex-direction: column;
+    li {
+      &:hover {
+        transition: 0.2s all ease;
+        .link {
+          color: $white;
+          font-weight: 600;
+          @include light {
+            color: $light-primary;
+          }
+          .icon {
+            @include light {
+              background: $light-primary;
+              color: $light-component;
+            }
+          }
+        }
+
+        @include dark {
+          &:nth-child(2n + 1) {
+            .icon {
+              background: #ff7551;
+            }
+          }
+          &:nth-child(2n) {
+            .icon {
+              background: #32a7e2;
+            }
+          }
+          &:nth-child(2n + 3) {
+            .icon {
+              background: #6c5ecf;
+            }
+          }
+        }
+      }
+      .link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: $body-color;
+        @include light {
+          color: $light-second;
+        }
+        &.activated {
+          color: $white;
+          font-weight: 600;
+          @include light {
+            color: $light-primary;
+          }
+          .icon {
+            background: #ff7551;
+            @include light {
+              box-shadow: 0px 0px 15px rgba($light-primary, 0.2);
+              color: $light-component;
+              background-color: $light-primary;
+            }
+          }
+        }
+
+        .icon {
+          padding: 8px;
+          border-radius: 10px;
+          background-color: $button-bg;
+          flex-shrink: 0;
+          margin-right: 16px;
+          @include light {
+            background-color: $light-component;
+          }
+
+          ion-icon {
+            font-size: 30px;
+          }
+        }
+
+        p {
+          width: 70%;
+        }
+      }
+
+      & + li {
+        margin-top: 26px;
+      }
     }
   }
 }
-
-.side-title {
+.title {
   font-size: 12px;
   letter-spacing: 0.07em;
   margin-bottom: 24px;
   color: $body-color;
 }
 
-.side-wrapper {
-  border-bottom: 1px solid $border-color;
-  padding: 36px 0;
-  width: 220px;
-  & + & {
-    border-bottom: none;
-  }
-}
+// .sub-link {
+//   display: flex;
+//   align-items: center;
+//   text-decoration: none;
+//   color: #808191;
+//   padding-left: 10px;
+//   margin-top: 15px;
+//   p {
+//     width: 70%;
+//   }
+//   .icon {
+//     padding: 8px;
+//     border-radius: 10px;
+//     background-color: $button-bg;
+//     flex-shrink: 0;
+//     margin-right: 16px;
+//     &:hover {
+//       color: #fff;
+//     }
+//     ion-icon {
+//       font-size: 20px;
+//     }
+//   }
+//   &:hover,
+//   &.is-active {
+//     color: #fff;
+//     font-weight: 600;
 
-.rightArr {
-  @include rightArrow();
-  width: 10px;
-  height: 10px;
-  border-top: 0px;
-  &::before {
-    top: 0;
-    border: $button-bg;
-  }
-}
-.downArr {
-  @include downArrow();
-  width: 10px;
-  height: 10px;
-  border-top: 0px;
+//     &:nth-child(2n + 1) {
+//       .icon {
+//         background: #ff7551;
+//       }
+//     }
+//     &:nth-child(2n) {
+//       .icon {
+//         background: #32a7e2;
+//       }
+//     }
+//     &:nth-child(2n + 3) {
+//       .icon {
+//         background: #6c5ecf;
+//       }
+//     }
+//   }
+// }
 
-  &::before {
-    top: 0;
-    border: $button-bg;
-  }
-}
+// .rightArr {
+//   @include rightArrow();
+//   width: 10px;
+//   height: 10px;
+//   border-top: 0px;
+//   &::before {
+//     top: 0;
+//     border: $button-bg;
+//   }
+// }
+// .downArr {
+//   @include downArrow();
+//   width: 10px;
+//   height: 10px;
+//   border-top: 0px;
+
+//   &::before {
+//     top: 0;
+//     border: $button-bg;
+//   }
+// }

@@ -1,19 +1,60 @@
-import React from "react";
-import styles from "./darkMode.module.scss";
-import { Sunny, Moon } from "react-ionicons";
+import React, { ChangeEventHandler } from "react";
+import { Moon, Sunny } from "react-ionicons";
+import "./darkMode.scss";
 
 export interface DarkModeProps {}
 
-export const DarkMode: React.FC<DarkModeProps> = (props) => {
-  //   const [darkmode, setDarkmode] = useState(false);
+const DarkMode: React.FC<DarkModeProps> = () => {
+  /* NEW (START) */
+  const setDark = () => {
+    localStorage.setItem("theme", "dark");
+    document.documentElement.setAttribute("data-theme", "dark");
+  };
+
+  const setLight = () => {
+    localStorage.setItem("theme", "light");
+    document.documentElement.setAttribute("data-theme", "light");
+  };
+
+  const storedTheme = localStorage.getItem("theme");
+
+  const prefersDark =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const defaultDark =
+    storedTheme === "dark" || (storedTheme === null && prefersDark);
+
+  if (defaultDark) {
+    setDark();
+  } else {
+    setLight();
+  }
+
+  const toggleTheme: ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (e.target.checked) {
+      setDark();
+    } else {
+      setLight();
+    }
+  };
+  /* NEW (END) */
   return (
-    <div className={styles["root"]}>
-      <input type="checkbox" className={styles["checkbox"]} id="checkbox" />
-      <label htmlFor="checkbox" className={styles["label"]}>
-        <Sunny color={"orange"} height={"15px"} width={"15px"} />
+    <div className={"root"}>
+      <input
+        type="checkbox"
+        className={"checkbox"}
+        id="checkbox"
+        onChange={toggleTheme}
+        defaultChecked={defaultDark}
+      />
+      <label htmlFor="checkbox" className={"label"}>
         <Moon color={"yellow"} height={"15px"} width={"15px"} />
-        <span className={styles["ball"]}></span>
+        <Sunny color={"orange"} height={"15px"} width={"15px"} />
+
+        <span className={"ball"}></span>
       </label>
     </div>
   );
 };
+export default DarkMode;

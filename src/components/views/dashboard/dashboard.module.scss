@@ -1,13 +1,15 @@
 @import "../../../styles/variables";
 @import "../../../styles/responsive";
 @import "../../../styles/mixin";
-@import "../../../styles/default";
 .root {
   width: 100%;
   height: 100vh;
   @include flex();
   background-color: $theme-bg;
   align-items: baseline;
+  @include light {
+    background-color: $ligth-theme-bg;
+  }
 }
 
 .summary {

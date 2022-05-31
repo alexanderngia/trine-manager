@@ -10,12 +10,18 @@
   font-family: $font-head;
   color: $black-head;
   line-height: 1.6;
+  @include light {
+    color: $light-second;
+  }
 }
 
 @mixin Text() {
   font-family: $font-p;
   color: $black-p;
   line-height: 1.4;
+  @include light {
+    color: $light-second;
+  }
 }
 
 @mixin rightArrow {
@@ -65,5 +71,29 @@
     top: -4px;
     left: 0;
     transform: rotate(45deg);
+  }
+}
+
+// DARK MODE
+
+@mixin light() {
+  @media (prefers-color-scheme: light) {
+    @at-root #{selector-nest(':root:not([data-theme=light]):not([data-theme=dark])', &)} {
+      @content;
+    }
+  }
+  @at-root #{selector-nest(':root[data-theme=light]', &)} {
+    @content;
+  }
+}
+
+@mixin dark() {
+  @media (prefers-color-scheme: dark) {
+    @at-root #{selector-nest(':root:not([data-theme=light]):not([data-theme=dark])', &)} {
+      @content;
+    }
+  }
+  @at-root #{selector-nest(':root[data-theme=dark]', &)} {
+    @content;
   }
 }

@@ -1,7 +1,6 @@
 @import "../../../styles/variables";
 @import "../../../styles/responsive";
 @import "../../../styles/mixin";
-@import "../../../styles/default";
 .root {
   width: 100%;
   height: 100vh;
@@ -10,6 +9,9 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  @include light {
+    background-color: $ligth-theme-bg;
+  }
   h1 {
     @include Heading();
     color: $white;

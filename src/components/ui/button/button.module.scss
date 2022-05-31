@@ -14,9 +14,18 @@
   cursor: pointer;
   transition: 0.2s all ease-in-out;
   margin-right: 15px;
+  @include light {
+    box-shadow: 0px 0px 10px rgba($light-second, 0.1);
+    background: $light-component;
+    color: $light-second;
+  }
   &:hover {
     transform: scale(1.1);
     background-color: $white;
     color: $black-head;
+    @include light {
+      background: $light-primary;
+      color: $light-component;
+    }
   }
 }

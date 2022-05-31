@@ -20,6 +20,7 @@ export interface IRegister {
   userName: string;
   userEmail: string;
   userPass: string;
+  // confirmPass: string;
   userPhone: string;
   userGender: string;
   userAdress: string;
@@ -38,6 +39,7 @@ export const register = createAsyncThunk(
       userName,
       userEmail,
       userPass,
+      // confirmPass,
       userPhone,
       userGender,
       userAdress,
@@ -50,6 +52,7 @@ export const register = createAsyncThunk(
         userName,
         userEmail,
         userPass,
+        // confirmPass,
         userPhone,
         userGender,
         userAdress,

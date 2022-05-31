@@ -1,6 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
+$ligth-theme-bg: #fbfbfb;
+$light-component: #ffffff;
+$light-primary: #6d81fe;
+$light-second: #23314c;
+
+// DARK MODE
+$black-head: rgba(#121212, 0.75);
+$black-banner: #121212;
+$black-p: #444444;
+$black-hover: rgba(#444444, 0.5);
+$white: #fbfbfb;
+
+$side-bar: #1f1d2b;
+//   $theme-bg: #f6f7fc;
+$theme-bg: #1f1d2b;
+$body-color: #808191;
+$button-bg: #353340;
+$border-color: rgb(128 129 145 / 24%);
+
 //Space
 $space: 5% 2%;
 
@@ -8,16 +27,3 @@ $space: 5% 2%;
 $font-head: "Playfair Display";
 $font-p: "Raleway";
 $font-number: "Inter", sans-serif;
-
-//Colors
-$black-head: rgba(#121212, 0.75);
-$black-banner: #121212;
-$black-p: #444444;
-$black-hover: rgba(#444444, 0.5);
-$white: #fbfbfb;
-
-$theme-bg: #1f1d2b;
-$body-color: #808191;
-$button-bg: #353340;
-$border-color: rgb(128 129 145 / 24%);
-$video-bg: #252936;

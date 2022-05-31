@@ -1,49 +1,90 @@
 import React, { useState } from "react";
 import styles from "./sidebar.module.scss";
 
-import { menuAdmin, menuSale } from "../../constant/sidebar";
-import { DarkMode } from "../ui/darkmode/darkMode";
+import { menuAdmin } from "../../constant/sidebar";
+import DarkMode from "../ui/darkmode/darkMode";
 import { NavLink } from "react-router-dom";
+import classNames from "classnames";
 
 export interface SidebarProps {}
 
-const Sidebar: React.FC<SidebarProps> = (props) => {
-  const [subMenu, setSubMenu] = useState(false);
+const Sidebar: React.FC<SidebarProps> = () => {
+  const [subNav, setSubNav] = useState(false);
+
+  const showSubNav = () => {
+    setSubNav(!subNav);
+  };
+
+  const navLinkClass = ({ isActive }: any) => {
+    return isActive
+      ? classNames(styles["link"], styles["activated"])
+      : styles["link"];
+  };
 
   return (
-    <div className={styles["sidebar"]}>
+    <div className={styles["root"]}>
       <span className={styles["logo"]}>S</span>
       <a className={styles["logo-expand"]} href="/dashboard">
         Trine Closet
       </a>
-      <div className={styles["side-wrapper"]}>
-        <div className={styles["side-title"]}>MENU</div>
+      <div className={styles["wrapper"]}>
+        <div className={styles["title"]}>MENU</div>
 
-        <div className={styles["side-menu"]}>
+        <ul className={styles["side-menu"]}>
           {React.Children.toArray(
             menuAdmin.map((menu) => {
               return (
-                <>
-                  <NavLink className={styles["sidebar-link"]} to={menu.path}>
+                <li>
+                  <NavLink
+                    to={menu.path}
+                    onClick={menu.subMenu && showSubNav}
+                    className={navLinkClass}
+                  >
                     <span
                       className={styles["icon"]}
                       dangerouslySetInnerHTML={{ __html: menu?.icon }}
                     />
 
                     <p>{menu.title}</p>
-                    {menu.subMenu && (
+
+                    {/* {menu.subMenu && (
                       <span
-                        className={
-                          styles[`${subMenu ? "rightArr" : "downArr"}`]
-                        }
+                        className={styles["sub-icon"]}
+                        dangerouslySetInnerHTML={{
+                          __html: subNav ? menu.downArr : menu.rightArr,
+                        }}
                       ></span>
-                    )}
+                    )} */}
                   </NavLink>
-                </>
+                  {/* {subNav &&
+                    React.Children.toArray(
+                      menu?.subMenu?.map((item: any) => {
+                        return (
+                          <ul>
+                            <li>
+                              <NavLink
+                                to={menu.path}
+                                className={styles["sub-link"]}
+                              >
+                                <span
+                                  className={styles["icon"]}
+                                  dangerouslySetInnerHTML={{
+                                    __html: item?.icon,
+                                  }}
+                                />
+
+                                <p>{item.title}</p>
+                              </NavLink>
+                            </li>
+                          </ul>
+                        );
+                      })
+                    )} */}
+                </li>
               );
             })
           )}
-        </div>
+        </ul>
       </div>
       <DarkMode />
     </div>
