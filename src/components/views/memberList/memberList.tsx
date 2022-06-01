@@ -1,6 +1,10 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import { IoAdd, IoDownloadOutline } from "react-icons/io5";
+import {
+  IoAdd,
+  IoDownloadOutline,
+  IoEllipsisVerticalSharp,
+} from "react-icons/io5";
 import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "../../../hooks/useRedux";
 import { register } from "../../../redux/reducers/authSlice";
@@ -152,161 +156,199 @@ const MemberList: React.FC<MemberListProps> = (props) => {
                 <Form className={styles["form"]}>
                   {!successful && (
                     <div className={styles["container"]}>
-                      <Field
-                        className={styles["input"]}
-                        type="text"
-                        placeholder="Enter your fullname"
-                        name="userName"
-                        value={values.userName}
-                        onChange={(e: any) => handleChange(e)}
-                      />
-                      <ErrorMessage
-                        className={styles["errMess"]}
-                        name="userName"
-                        component="div"
-                      />
-
-                      <Field
-                        className={styles["input"]}
-                        type="email"
-                        placeholder="Enter your email"
-                        name="userEmail"
-                        value={values.userEmail}
-                        onChange={(e: any) => handleChange(e)}
-                      />
-                      <ErrorMessage
-                        className={styles["errMess"]}
-                        name="userEmail"
-                        component="div"
-                      />
-
-                      <Field
-                        className={styles["input"]}
-                        type="password"
-                        placeholder="Enter your password"
-                        name="userPass"
-                        value={values.userPass}
-                        onChange={(e: any) => handleChange(e)}
-                      />
-                      <ErrorMessage
-                        className={styles["errMess"]}
-                        name="userPass"
-                        component="div"
-                      />
-                      <Field
-                        className={styles["input"]}
-                        type="password"
-                        placeholder="Confirm your password"
-                        name="confirmPass"
-                        value={values.confirmPass}
-                        onChange={(e: any) => handleChange(e)}
-                      />
-                      <ErrorMessage
-                        className={styles["errMess"]}
-                        name="confirmPass"
-                        component="div"
-                      />
-
-                      <Field
-                        className={styles["input"]}
-                        type="phone"
-                        placeholder="Enter your phone"
-                        name="userPhone"
-                        value={values.userPhone}
-                        onChange={(e: any) => handleChange(e)}
-                      />
-                      <ErrorMessage
-                        className={styles["errMess"]}
-                        name="userPhone"
-                        component="div"
-                      />
-                      {/* <Field
-                        className={styles["select"]}
-                        id="gender"
-                        name="userGender"
-                        component="select"
-                        value={values.userGender}
-                        onChange={(e: any) => handleChange(e)}
-                      >
-                        <option value="1">Male</option>
-                        <option value="0">Female</option>
-                      </Field> */}
-                      <label htmlFor="Male" className={styles["checkbox"]}>
+                      <span className={styles["box"]}>
+                        <label htmlFor="userName" className={styles["label"]}>
+                          Full Name
+                        </label>
                         <Field
-                          type="radio"
-                          id="Male"
-                          name="userGender"
-                          value="1"
-                        ></Field>
-                        Male
-                      </label>
-                      <label htmlFor="Female" className={styles["checkbox"]}>
-                        <Field
-                          type="radio"
-                          id="Female"
-                          name="userGender"
-                          value="0"
-                        ></Field>
-                        Female
-                      </label>
-                      <div>{values.userGender}</div>
-                      {/* {console.log(values.userGender)} */}
-                      <ErrorMessage
-                        className={styles["errMess"]}
-                        name="userGender"
-                        component="div"
-                      />
+                          id="userName"
+                          className={styles["input"]}
+                          type="text"
+                          placeholder="Nguyễn Văn A"
+                          name="userName"
+                          value={values.userName}
+                          onChange={(e: any) => handleChange(e)}
+                        />
+                        <ErrorMessage
+                          className={styles["errMess"]}
+                          name="userName"
+                          component="div"
+                        />
+                      </span>
+                      <span className={styles["box"]}>
+                        <label htmlFor="userEmail" className={styles["label"]}>
+                          Email
+                        </label>
 
-                      <Field
-                        className={styles["input"]}
-                        type="text"
-                        placeholder="Enter your address"
-                        name="userAdress"
-                        value={values.userAdress}
-                        onChange={(e: any) => handleChange(e)}
-                      />
-                      <ErrorMessage
-                        className={styles["errMess"]}
-                        name="userAdress"
-                        component="div"
-                      />
-
-                      {/* <Field
-                        className={styles["select"]}
-                        id="role"
-                        name="userRole"
-                        component="select"
-                        value={values.userRole}
-                        onChange={(e: any) => handleChange(e)}
-                      >
-                        <option value="1">Admin</option>
-                        <option value="2">Sale</option>
-                      </Field> */}
-                      <label htmlFor="Admin" className={styles["checkbox"]}>
                         <Field
-                          type="radio"
-                          id="Admin"
-                          name="userRole"
-                          value="1"
-                        ></Field>
-                        Admin
-                      </label>
-                      <label htmlFor="Sale" className={styles["checkbox"]}>
-                        <Field
-                          type="radio"
-                          id="Sale"
-                          name="userRole"
-                          value="2"
-                        ></Field>
-                        Sale
-                      </label>
-                      <div>{values.userRole}</div>
+                          className={styles["input"]}
+                          type="email"
+                          placeholder="nguyenvana@gmail.com"
+                          name="userEmail"
+                          id="userEmail"
+                          value={values.userEmail}
+                          onChange={(e: any) => handleChange(e)}
+                        />
+                        <ErrorMessage
+                          className={styles["errMess"]}
+                          name="userEmail"
+                          component="div"
+                        />
+                      </span>
+                      <span className={styles["box"]}>
+                        <label htmlFor="userPass" className={styles["label"]}>
+                          Mật Khẩu
+                        </label>
 
-                      <ErrorMessage
-                        className={styles["errMess"]}
-                        name="userRole"
-                        component="div"
-                      />
+                        <Field
+                          className={styles["input"]}
+                          type="password"
+                          placeholder="abc1223@"
+                          name="userPass"
+                          id="userPass"
+                          value={values.userPass}
+                          onChange={(e: any) => handleChange(e)}
+                        />
+                        <ErrorMessage
+                          className={styles["errMess"]}
+                          name="userPass"
+                          component="div"
+                        />
+                      </span>
+                      <span className={styles["box"]}>
+                        <label
+                          htmlFor="confirmPass"
+                          className={styles["label"]}
+                        >
+                          Xác Nhận Mật Khẩu
+                        </label>
+
+                        <Field
+                          className={styles["input"]}
+                          type="password"
+                          placeholder="abc123@"
+                          name="confirmPass"
+                          id="confirmPass"
+                          value={values.confirmPass}
+                          onChange={(e: any) => handleChange(e)}
+                        />
+                        <ErrorMessage
+                          className={styles["errMess"]}
+                          name="confirmPass"
+                          component="div"
+                        />
+                      </span>
+                      <span className={styles["box"]}>
+                        <label htmlFor="userPhone" className={styles["label"]}>
+                          Phone
+                        </label>
+
+                        <Field
+                          className={styles["input"]}
+                          type="phone"
+                          placeholder="0988379379"
+                          name="userPhone"
+                          id="userPhone"
+                          value={values.userPhone}
+                          onChange={(e: any) => handleChange(e)}
+                        />
+                        <ErrorMessage
+                          className={styles["errMess"]}
+                          name="userPhone"
+                          component="div"
+                        />
+                      </span>
+                      <span className={styles["box"]}>
+                        <label htmlFor="userAdress" className={styles["label"]}>
+                          Địa Chỉ
+                        </label>
+                        <Field
+                          className={styles["input"]}
+                          type="text"
+                          placeholder="100C Hậu Giang Quận 6 TP.HCM"
+                          name="userAdress"
+                          id="userAdress"
+                          value={values.userAdress}
+                          onChange={(e: any) => handleChange(e)}
+                        />
+                        <ErrorMessage
+                          className={styles["errMess"]}
+                          name="userAdress"
+                          component="div"
+                        />
+                      </span>
+                      <span className={styles["box"]}>
+                        <p>Giới Tính</p>
+                        <div className={styles["container-checkbox"]}>
+                          <label htmlFor="Male" className={styles["checkbox"]}>
+                            <Field
+                              type="radio"
+                              id="Male"
+                              name="userGender"
+                              value="1"
+                            ></Field>
+                            <span>
+                              <p>Male</p>
+                            </span>
+                          </label>
+                          <label
+                            htmlFor="Female"
+                            className={styles["checkbox"]}
+                          >
+                            <Field
+                              type="radio"
+                              id="Female"
+                              name="userGender"
+                              value="0"
+                            ></Field>
+                            <span>
+                              <p>Female</p>
+                            </span>
+                          </label>
+                          <div>{values.userGender}</div>
+                          {/* {console.log(values.userGender)} */}
+                          <ErrorMessage
+                            className={styles["errMess"]}
+                            name="userGender"
+                            component="div"
+                          />
+                        </div>
+                      </span>
+
+                      <span className={styles["box"]}>
+                        <p>Vai Trò</p>
+                        <div className={styles["container-checkbox"]}>
+                          <label htmlFor="Admin" className={styles["checkbox"]}>
+                            <Field
+                              type="radio"
+                              id="Admin"
+                              name="userRole"
+                              value="1"
+                            ></Field>
+                            <span>
+                              <p>Admin</p>
+                            </span>
+                          </label>
+                          <label htmlFor="Sale" className={styles["checkbox"]}>
+                            <Field
+                              type="radio"
+                              id="Sale"
+                              name="userRole"
+                              value="2"
+                            ></Field>
+                            <span>
+                              <p>Sale</p>
+                            </span>
+                          </label>
+                          <div>{values.userRole}</div>
+
+                          <ErrorMessage
+                            className={styles["errMess"]}
+                            name="userRole"
+                            component="div"
+                          />
+                        </div>
+                      </span>
 
                       {/* <p className={styles["errMessage"]}>{errMessage}</p> */}
                       <button type="submit">Signup</button>
@@ -343,6 +385,9 @@ const MemberList: React.FC<MemberListProps> = (props) => {
                         </li>
                         <li>{listItems.phoneUser}</li>
                         <li>{listItems.emailUser}</li>
+                        <li>
+                          <IoEllipsisVerticalSharp />
+                        </li>
                       </ul>
                     </a>
                   </CardList>

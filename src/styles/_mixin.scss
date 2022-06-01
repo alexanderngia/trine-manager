@@ -24,6 +24,10 @@
   }
 }
 
+@mixin boxShadow() {
+  box-shadow: 17px 17px 86px 10px rgba($light-black, 0.1);
+}
+
 @mixin rightArrow {
   position: relative;
   width: 60%;
