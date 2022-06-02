@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = (props) => {
     dispatch(authActions.logout());
   };
 
-  if (!isLoggedIn) {
+  if (!user) {
     return <Navigate to="/" />;
   }
 
