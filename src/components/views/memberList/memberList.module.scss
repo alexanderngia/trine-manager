@@ -30,6 +30,23 @@
 
   .card-container {
     width: 100%;
+    ul {
+      @include flex();
+      justify-content: space-between;
+      width: 100%;
+      li {
+        width: 15%;
+        &:nth-of-type(2) {
+          width: 7%;
+        }
+        &:nth-of-type(3) {
+          width: 15%;
+        }
+        &:last-of-type {
+          width: 2%;
+        }
+      }
+    }
   }
 }
 
@@ -52,7 +69,7 @@
     flex-direction: column;
     align-items: flex-start;
 
-    &:nth-of-type(7),
+    &:nth-of-type(6),
     &:last-of-type {
       p {
         text-align: left;
@@ -159,12 +176,6 @@
       }
 
       input[type="radio"] {
-        // display: none;
-        // .checkbox + &:checked {
-        //   color: $black-p;
-        //   background-color: black;
-        //   border: 1px solid red;
-        // }
         @include light {
           &:checked + span:after {
             content: "";
@@ -218,9 +229,10 @@
     }
   }
   .message {
-    margin: 15px 0 0;
-    color: $black-hover;
+    margin: 0 0 15px 0;
+    color: $light-primary;
     font-size: 12px;
+
     a {
       color: $black-p;
       text-decoration: none;
