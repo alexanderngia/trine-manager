@@ -39,7 +39,6 @@ export const register = createAsyncThunk(
       userName,
       userEmail,
       userPass,
-      // confirmPass,
       userPhone,
       userGender,
       userAdress,
@@ -52,7 +51,6 @@ export const register = createAsyncThunk(
         userName,
         userEmail,
         userPass,
-        // confirmPass,
         userPhone,
         userGender,
         userAdress,
@@ -101,12 +99,12 @@ const authSlice = createSlice({
   },
 
   extraReducers: {
-    [register.fulfilled.toString()]: (state: AuthState) => {
-      state.isLoggedIn = false;
-    },
-    [register.rejected.toString()]: (state: AuthState) => {
-      state.isLoggedIn = false;
-    },
+    // [register.fulfilled.toString()]: (state: AuthState) => {
+    //   state.isLoggedIn = true;
+    // },
+    // [register.rejected.toString()]: (state: AuthState) => {
+    //   state.isLoggedIn = true;
+    // },
 
     [login.fulfilled.toString()]: (state: AuthState, action: any) => {
       state.user = action.payload.user;
