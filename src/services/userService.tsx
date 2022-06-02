@@ -1,26 +1,28 @@
 import axios from "axios";
 // import authHeader from "./authHeader";
-const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/`;
+const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/user/`;
 // const getPublicContent = () => {
 //   return axios.get(API_URL + "all");
 // };
 // const requestConfig: AxiosRequestConfig = { headers: authHeader() };
 const getUserBoard = (idUser: string | number) => {
-  return axios.get(API_URL + `user?id=${idUser}`);
+  return axios.get(API_URL + `?id=${idUser}`);
 };
-const getCustomerBoard = (idCus: string | number) => {
-  return axios.get(API_URL + `customer?id=${idCus}`);
+
+const handleUpdateApi = async (updatedData: any) => {
+  return await axios.put(API_URL + "edit", updatedData);
 };
-const getOrderBoard = (idOrder: string | number) => {
-  return axios.get(API_URL + `order-list?id=${idOrder}`);
+const handleDeleteApi = async (userId: any) => {
+  return await axios.delete(API_URL + "delete", {
+    data: {
+      id: userId,
+    },
+  });
 };
-const getProductBoard = (idProduct: string | number) => {
-  return axios.get(API_URL + `warehouse?id=${idProduct}`);
-};
+
 const userService = {
   getUserBoard,
-  getCustomerBoard,
-  getOrderBoard,
-  getProductBoard,
+  handleUpdateApi,
+  handleDeleteApi,
 };
 export default userService;

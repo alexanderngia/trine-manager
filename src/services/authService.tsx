@@ -32,7 +32,7 @@ const handleRegisterApi = ({
     phoneUser: userPhone,
     genderUser: userGender,
     adressUser: userAdress,
-    idRole: userRole,
+    typeRole: userRole,
   });
 };
 
@@ -48,6 +48,8 @@ const handleLoginApi = async (userName: string, userPass: string) => {
   }
   return data;
 };
+
+
 
 const authService = {
   handleRegisterApi,

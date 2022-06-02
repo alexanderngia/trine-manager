@@ -1,7 +1,11 @@
 import axios from "../axios";
+const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/warehouse`;
 
-const handleProductApi = () => {
-  return axios.post("/api/login");
+const getProductBoard = (idProduct: string | number) => {
+  return axios.get(API_URL + `?id=${idProduct}`);
 };
 
-export { handleProductApi };
+const productService = {
+  getProductBoard,
+};
+export default productService;
