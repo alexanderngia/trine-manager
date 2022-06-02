@@ -27,6 +27,7 @@ const Login: React.FC<LoginProps> = (props) => {
 
   const handleLogin = async (formValue: any) => {
     const { userEmail, userPass } = formValue;
+    
     try {
       dispatch(login({ userEmail, userPass }));
     } catch (error: any) {
@@ -63,7 +64,7 @@ const Login: React.FC<LoginProps> = (props) => {
               <Form className={styles["login-form"]}>
                 <Field
                   type="email"
-                  placeholder="Enter your email !"
+                  placeholder="Enter your email"
                   name="userEmail"
                   value={values.userEmail}
                   onChange={(e: any) => handleChange(e)}
