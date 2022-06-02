@@ -1,15 +1,21 @@
-import React, { useState } from "react";
-import styles from "./sidebar.module.scss";
-
-import { menuAdmin } from "../../constant/sidebar";
-import DarkMode from "../ui/darkmode/darkMode";
-import { NavLink } from "react-router-dom";
 import classNames from "classnames";
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { menuAdmin } from "../../constant/sidebar";
+import { useAppSelector } from "../../hooks/useRedux";
+import DarkMode from "../ui/darkmode/darkMode";
+import styles from "./sidebar.module.scss";
 
 export interface SidebarProps {}
 
 const Sidebar: React.FC<SidebarProps> = () => {
   const [subNav, setSubNav] = useState(false);
+  const [role, setRole] = useState("");
+  const { user } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    setRole(user.typeRole);
+  }, []);
 
   const showSubNav = () => {
     setSubNav(!subNav);
