@@ -4,9 +4,18 @@ import classNames from "classnames";
 export interface CardListProps {
   children: any;
   className?: string;
+  onClick?: any;
 }
-const CardList: React.FC<CardListProps> = ({ children, className }) => {
-  return <li className={classNames(styles["card"], className)}>{children}</li>;
+const CardList: React.FC<CardListProps> = ({
+  children,
+  className,
+  onClick,
+}) => {
+  return (
+    <li onClick={onClick} className={classNames(styles["card"], className)}>
+      {children}
+    </li>
+  );
 };
 
 export default CardList;

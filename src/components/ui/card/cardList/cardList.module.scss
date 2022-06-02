@@ -5,69 +5,55 @@
 
 .card {
   @include Text();
+  padding: 2% 3%;
   font-family: $font-number;
   font-size: 0.8rem;
   margin-bottom: 15px;
   border-radius: 10px;
-  // background-color: $button-bg;
+  transition: 0.2s all ease-in;
+  cursor: pointer;
+  background-color: $button-bg;
+  color: $light-component;
+
   @include light {
     box-shadow: 0px 0px 10px rgba($light-second, 0.1);
     background-color: $light-component;
     color: $light-second;
-  }
-  @include dark {
-    &:nth-child(2n + 1) {
-      background: #ff7551;
-    }
-    &:nth-child(2n) {
-      background: #32a7e2;
-    }
-    &:nth-child(2n + 3) {
-      background: #6c5ecf;
-    }
-  }
-
-  &:hover {
-    transition: 0.2s all ease-in;
-    transform: scale(1.03);
-    a {
+    &:hover {
+      transform: scale(1.03);
+      background-color: $light-primary;
       color: $light-component;
     }
-    @include light {
-      background-color: $light-primary;
-
-      a {
-        color: $light-component;
+  }
+  @include dark {
+    &:hover {
+      transform: scale(1.03);
+      color: $light-component;
+      &:nth-child(2n + 1) {
+        background: #ff7551;
+      }
+      &:nth-child(2n) {
+        background: #32a7e2;
+      }
+      &:nth-child(2n + 3) {
+        background: #6c5ecf;
       }
     }
   }
-
-  a {
-    padding: 2% 3%;
-    width: 100%;
-    text-decoration: none;
-    color: $white;
+  ul {
     @include flex();
-
-    @include light {
-      color: $light-second;
-    }
-
-    ul {
-      @include flex();
-      justify-content: space-between;
-      width: 100%;
-      li {
+    justify-content: space-between;
+    width: 100%;
+    li {
+      width: 15%;
+      &:nth-of-type(2) {
+        width: 7%;
+      }
+      &:nth-of-type(3) {
         width: 15%;
-        &:nth-of-type(2) {
-          width: 7%;
-        }
-        &:nth-of-type(3) {
-          width: 15%;
-        }
-        &:last-of-type {
-          width: 2%;
-        }
+      }
+      &:last-of-type {
+        width: 2%;
       }
     }
   }
