@@ -30,5 +30,13 @@
 
   .card-container {
     width: 100%;
+    .customer-list {
+      li {
+        width: 20%;
+      }
+    }
+  }
+  .form {
+    @include formModal();
   }
 }
