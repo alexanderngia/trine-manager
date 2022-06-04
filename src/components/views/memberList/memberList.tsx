@@ -1,11 +1,12 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import { IoAdd, IoDownloadOutline, IoCloseCircle } from "react-icons/io5";
+import { IoAdd, IoDownloadOutline } from "react-icons/io5";
 import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "../../../hooks/useRedux";
 import { register } from "../../../redux/reducers/authSlice";
+import { messageActions } from "../../../redux/reducers/messageSlice";
 import userService from "../../../services/userService";
-import { ButtonMain } from "../../ui/button/button";
+import { ButtonMain, ButtonSub } from "../../ui/button/button";
 import CardList from "../../ui/card/cardList/cardList";
 import { Modal } from "../../ui/modal/modal";
 import { Layout } from "../layout/layout";
@@ -15,11 +16,14 @@ export interface MemberListProps {}
 
 const MemberList: React.FC<MemberListProps> = (props) => {
   const [idUser, setIdUser] = useState(`ALL`);
+  const [deleteUser, setDeleteUser] = useState([]);
   const [data, setData] = useState([]);
+
   const [role, setRole] = useState("");
   const [modal, setModal] = useState(false);
 
   const [profile, setProfile] = useState(false);
+
   const [initialValue, setInitialValue] = useState({
     id: "",
     userName: "",
@@ -48,6 +52,7 @@ const MemberList: React.FC<MemberListProps> = (props) => {
       }
     };
     fetchData();
+
     const modal = localStorage.getItem("MODAL");
     if (modal) {
       setModal(true);
@@ -57,6 +62,7 @@ const MemberList: React.FC<MemberListProps> = (props) => {
   const openModal = () => {
     setModal(true);
     localStorage.setItem("MODAL", "TRUE");
+    dispatch(messageActions.clearMessage());
   };
 
   const closeModal = () => {
@@ -66,16 +72,21 @@ const MemberList: React.FC<MemberListProps> = (props) => {
 
   const openItemModal = async (infoUser: any) => {
     setProfile(true);
-    setInitialValue({
-      id: `${infoUser.id}`,
-      userName: `${infoUser.fullNameUser}`,
-      userEmail: `${infoUser.emailUser}`,
-      userPass: `${infoUser.passwordUser}`,
-      userPhone: `${infoUser.phoneUser}`,
-      userGender: `${infoUser.genderUser}`,
-      userAdress: `${infoUser.adressUser}`,
-      userRole: `${infoUser.typeRole}`,
-    });
+    if (infoUser) {
+      setInitialValue({
+        ...initialValue,
+        id: `${infoUser.id}`,
+        userName: `${infoUser.fullNameUser}`,
+        userEmail: `${infoUser.emailUser}`,
+        // userPass: `${infoUser.passwordUser}`,
+        userPhone: `${infoUser.phoneUser}`,
+        userGender: `${infoUser.genderUser}`,
+        userAdress: `${infoUser.adressUser}`,
+        userRole: `${infoUser.typeRole}`,
+      });
+      setDeleteUser(infoUser);
+      dispatch(messageActions.clearMessage());
+    }
   };
 
   const closeItemModal = () => {
@@ -100,8 +111,23 @@ const MemberList: React.FC<MemberListProps> = (props) => {
       );
       if (confirmDelete === "DELETE") {
         let res = await userService.handleDeleteApi(userRemove.id);
-        const message = res.data.errMessage;
-        alert(userRemove.fullNameUser + message);
+        const errMessage = res.data.errMessage;
+        const message = res.data.message;
+        if (errMessage) {
+          dispatch(messageActions.setMessage(errMessage));
+        }
+        if (message) {
+          dispatch(messageActions.clearMessage());
+          alert(userRemove.fullNameUser + message);
+          setProfile(false);
+        }
+      }
+      if (confirmDelete === "" || null) {
+        dispatch(
+          messageActions.setMessage(
+            `Fail to remove ${userRemove.fullNameUser}!`
+          )
+        );
       }
     } catch (error) {
       console.log(error);
@@ -116,7 +142,7 @@ const MemberList: React.FC<MemberListProps> = (props) => {
     userEmail: Yup.string()
       .required("Required!")
       .matches(
-        /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+        /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
         "Please enter a valid email address!"
       ),
     userPass: Yup.string().required("Required!"),
@@ -163,7 +189,7 @@ const MemberList: React.FC<MemberListProps> = (props) => {
       id,
       userName,
       userEmail,
-      userPass,
+      // userPass,
       userPhone,
       userGender,
       userAdress,
@@ -174,19 +200,48 @@ const MemberList: React.FC<MemberListProps> = (props) => {
         id,
         userName,
         userEmail,
-        userPass,
+        // userPass,
         userPhone,
         userGender,
         userAdress,
         userRole,
       });
+
       const message = res.data.message;
-      alert(`${userName + message}`);
-      setProfile(false);
+      const errMessage = res.data.errMessage;
+      if (errMessage) {
+        dispatch(messageActions.setMessage(errMessage));
+      }
+      if (message) {
+        alert(`${userName} ${message}`);
+        setProfile(false);
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
+  const validationSchemaItem = Yup.object().shape({
+    userName: Yup.string()
+      .min(4, "Tối thiểu 4 ký tự hoặc hơn")
+      .required("Required!"),
+
+    userEmail: Yup.string()
+      .required("Required!")
+      .matches(
+        /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+        "Please enter a valid email address!"
+      ),
+    userPhone: Yup.string()
+      .required("Required!")
+      .matches(
+        /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/,
+        "Please enter a valid phone number!"
+      ),
+    userGender: Yup.string().required("Required!"),
+    userAdress: Yup.string().required("Required!"),
+    userRole: Yup.string().required("Required!"),
+  });
   return (
     <Layout>
       <div className={styles["root"]}>
@@ -336,8 +391,6 @@ const MemberList: React.FC<MemberListProps> = (props) => {
                             <p>Female</p>
                           </span>
                         </label>
-                        <div>{values.userGender}</div>
-                        {/* {console.log(values.userGender)} */}
                         <ErrorMessage
                           className={styles["errMess"]}
                           name="userGender"
@@ -370,8 +423,6 @@ const MemberList: React.FC<MemberListProps> = (props) => {
                             <p>Sale</p>
                           </span>
                         </label>
-                        <div>{values.userRole}</div>
-
                         <ErrorMessage
                           className={styles["errMess"]}
                           name="userRole"
@@ -382,7 +433,9 @@ const MemberList: React.FC<MemberListProps> = (props) => {
                   </div>
                   <p className={styles["message"]}>{message}</p>
 
-                  <button type="submit">Tạo Thành Viên</button>
+                  <div className={styles["button-container"]}>
+                    <button type="submit">Tạo Thành Viên</button>
+                  </div>
                 </Form>
               )}
             </Formik>
@@ -402,11 +455,11 @@ const MemberList: React.FC<MemberListProps> = (props) => {
                         </li>
                         <li>{listItems.phoneUser}</li>
                         <li>{listItems.emailUser}</li>
-                        <li>
+                        {/* <li>
                           <IoCloseCircle
                             onClick={() => deleteItem(listItems)}
                           />
-                        </li>
+                        </li> */}
                       </ul>
                     </CardList>
                   );
@@ -418,7 +471,7 @@ const MemberList: React.FC<MemberListProps> = (props) => {
                 <h1>THÔNG TIN THÀNH VIÊN</h1>
                 <Formik
                   initialValues={initialValue}
-                  validationSchema={validationSchema}
+                  validationSchema={validationSchemaItem}
                   onSubmit={handleUpdate}
                 >
                   {({ values, handleChange }: any) => (
@@ -475,29 +528,6 @@ const MemberList: React.FC<MemberListProps> = (props) => {
                           <ErrorMessage
                             className={styles["errMess"]}
                             name="userEmail"
-                            component="div"
-                          />
-                        </span>
-                        <span className={styles["box"]}>
-                          <label
-                            htmlFor="userPassUpdate"
-                            className={styles["label"]}
-                          >
-                            Mật Khẩu
-                          </label>
-
-                          <Field
-                            className={styles["input"]}
-                            type="password"
-                            placeholder="abc1223@"
-                            name="userPass"
-                            id="userPassUpdate"
-                            value={values.userPass}
-                            onChange={(e: any) => handleChange(e)}
-                          />
-                          <ErrorMessage
-                            className={styles["errMess"]}
-                            name="userPass"
                             component="div"
                           />
                         </span>
@@ -626,7 +656,15 @@ const MemberList: React.FC<MemberListProps> = (props) => {
                       </div>
                       <p className={styles["message"]}>{message}</p>
 
-                      <button type="submit">Cập Nhật</button>
+                      <div className={styles["button-container"]}>
+                        <ButtonSub
+                          type="button"
+                          onClick={() => deleteItem(deleteUser)}
+                        >
+                          Xóa Thành Viên
+                        </ButtonSub>
+                        <button type="submit">Cập Nhật</button>
+                      </div>
                     </Form>
                   )}
                 </Formik>
