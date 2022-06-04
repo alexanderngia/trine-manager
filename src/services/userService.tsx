@@ -1,6 +1,6 @@
 import axios from "axios";
 // import authHeader from "./authHeader";
-const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/user/`;
+const API_URL = `${process.env.REACT_APP_BACKEND_URL}/api/user`;
 // const getPublicContent = () => {
 //   return axios.get(API_URL + "all");
 // };
@@ -10,7 +10,7 @@ export interface UpdateProps {
   id?: number;
   userName: string;
   userEmail: string;
-  userPass: string;
+  // userPass: string;
   userPhone: string;
   userGender: string;
   userAdress: string;
@@ -25,17 +25,17 @@ const handleUpdateApi = async ({
   id,
   userName,
   userEmail,
-  userPass,
+  // userPass,
   userPhone,
   userGender,
   userAdress,
   userRole,
 }: UpdateProps) => {
-  return await axios.put(API_URL + "edit", {
+  return await axios.put(API_URL + "/edit", {
     id: id,
     fullNameUser: userName,
     emailUser: userEmail,
-    passwordUser: userPass,
+    // passwordUser: userPass,
     phoneUser: userPhone,
     genderUser: userGender,
     adressUser: userAdress,
@@ -43,7 +43,7 @@ const handleUpdateApi = async ({
   });
 };
 const handleDeleteApi = async (userId: any) => {
-  return await axios.delete(API_URL + "delete", {
+  return await axios.delete(API_URL + "/delete", {
     data: {
       id: userId,
     },
