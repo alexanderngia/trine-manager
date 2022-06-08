@@ -114,7 +114,7 @@
   }
   .box {
     width: 45%;
-    height: 100px;
+    height: 80px;
     position: relative;
     @include flex();
     justify-content: flex-start;
@@ -135,6 +135,12 @@
         @include flex();
         height: 50px;
       }
+    }
+
+    .img-product {
+      margin: 0 auto;
+      width: 200px;
+      height: 200px;
     }
 
     .label {
@@ -165,6 +171,12 @@
           color: rgba($light-black, 0.3);
         }
       }
+    }
+
+    input[type="color"] {
+      height: 47px;
+      padding: 8px;
+      cursor: pointer;
     }
     .select {
       font-family: $font-p;
@@ -257,7 +269,7 @@
       font-size: 0.6rem;
       position: absolute;
       bottom: 13px;
-      left: 0;
+      right: 0;
       text-align: left;
       color: rgb(176, 0, 0);
     }

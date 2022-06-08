@@ -2,13 +2,13 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { IoAdd, IoDownloadOutline } from "react-icons/io5";
 import * as Yup from "yup";
-import { useAppDispatch, useAppSelector } from "../../../hooks/useRedux";
-import { messageActions } from "../../../redux/reducers/messageSlice";
-import customerService from "../../../services/customerService";
-import { ButtonMain, ButtonSub } from "../../ui/button/button";
-import CardList from "../../ui/card/cardList/cardList";
-import { Modal } from "../../ui/modal/modal";
-import { Layout } from "../layout/layout";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import { messageActions } from "redux/reducers/messageSlice";
+import customerService from "services/customerService";
+import { ButtonMain, ButtonSub } from "components/ui/button/button";
+import CardList from "components/ui/card/cardList/cardList";
+import { Modal } from "components/ui/modal/modal";
+import { Layout } from "components/views/layout/layout";
 import styles from "./customerList.module.scss";
 
 export interface CustomerListProps {}
@@ -48,7 +48,11 @@ const CustomerList: React.FC<CustomerListProps> = (props) => {
       }
     };
     fetchData();
-  }, [idCus, user.typeRole]);
+    const modal = localStorage.getItem("MODAL");
+    if (modal) {
+      setModal(true);
+    }
+  }, [idCus, data, user]);
 
   const openModal = () => {
     setModal(true);
@@ -110,9 +114,7 @@ const CustomerList: React.FC<CustomerListProps> = (props) => {
       }
       if (confirmDelete === "" || null) {
         dispatch(
-          messageActions.setMessage(
-            `Fail to remove ${userRemove.fullNameCus}!`
-          )
+          messageActions.setMessage(`Fail to remove ${userRemove.fullNameCus}!`)
         );
       }
     } catch (error) {

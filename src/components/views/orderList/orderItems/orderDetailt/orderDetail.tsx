@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./orderDetail.module.scss";
-import { Layout } from "../../../layout/layout";
-import { ButtonMain } from "../../../../ui/button/button";
-import CardList from "../../../../ui/card/cardList/cardList";
+import { Layout } from "components/views/layout/layout";
+import { ButtonMain } from "components/ui/button/button";
+import CardList from "components/ui/card/cardList/cardList";
 import { IoAdd, IoDownloadOutline } from "react-icons/io5";
 export interface OrderDetailProps {}
 

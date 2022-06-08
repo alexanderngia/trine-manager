@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { register } from "../../../../redux/reducers/authSlice";
-import { useAppDispatch, useAppSelector } from "../../../../hooks/useRedux";
-import { history } from "../../../../utils/history";
+import { register } from "redux/reducers/authSlice";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import { history } from "utils/history";
 import styles from "./register.module.scss";
-import { messageActions } from "../../../../redux/reducers/messageSlice";
+import { messageActions } from "redux/reducers/messageSlice";
 interface RegisterProps {}
 
 const Register: React.FC<RegisterProps> = (props) => {

@@ -1,7 +1,6 @@
-@import "../../../styles/variables";
-@import "../../../styles/responsive";
-@import "../../../styles/mixin";
-@import "../../../styles/default";
+@import "styles/variables";
+@import "styles/responsive";
+@import "styles/mixin";
 
 .root {
   background-color: $theme-bg;

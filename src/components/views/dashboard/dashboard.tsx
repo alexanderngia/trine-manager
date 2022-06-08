@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./dashboard.module.scss";
-import { Layout } from "../layout/layout";
-import { dataDB } from "../../../constant/data";
-import CardTotal from "../../ui/card/cardTotal";
+import { Layout } from "components/views/layout/layout";
+import { dataDB } from "constant/data";
+import CardTotal from "components/ui/card/cardTotal";
 
 export interface DashboardProps {}
 

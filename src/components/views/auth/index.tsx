@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./index.module.scss";
-import Login from "./login/login";
-import Register from "./register/register";
+import Login from "components/views/auth/login/login";
+import Register from "components/views/auth/register/register";
 interface AuthenticationProps {}
 
 const Authentication: React.FC<AuthenticationProps> = (props) => {

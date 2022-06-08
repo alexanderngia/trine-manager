@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { menuAdmin } from "../../constant/sidebar";
-import { useAppSelector } from "../../hooks/useRedux";
-import DarkMode from "../ui/darkmode/darkMode";
+import { menuAdmin } from "constant/sidebar";
+import { useAppSelector } from "hooks/useRedux";
+import DarkMode from "components/ui/darkmode/darkMode";
 import styles from "./sidebar.module.scss";
 
 export interface SidebarProps {}

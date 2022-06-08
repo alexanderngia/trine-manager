@@ -1,7 +1,7 @@
 import { messageActions } from "./messageSlice";
-import authService from "../../services/authService";
+import authService from "services/authService";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { history } from "../../utils/history";
+import { history } from "utils/history";
 
 export interface AuthState {
   isLoggedIn?: boolean;

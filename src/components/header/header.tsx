@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./header.module.scss";
-import { menuUser } from "../../constant/profile";
+import { menuUser } from "constant/profile";
 import { Navigate } from "react-router-dom";
 import { IoLogOut } from "react-icons/io5";
-import { useAppDispatch, useAppSelector } from "../../hooks/useRedux";
-import { authActions } from "../../redux/reducers/authSlice";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import { authActions } from "redux/reducers/authSlice";
 
 export interface HeaderProps {}
 

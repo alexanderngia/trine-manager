@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import Header from "components/header/header";
+import Sidebar from "components/sidebar/sidebar";
 import styles from "./layout.module.scss";
-import Sidebar from "../../sidebar/sidebar";
-import Header from "../../header/header";
 export interface LayoutProps {
   children: any;
 }

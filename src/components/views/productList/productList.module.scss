@@ -1,6 +1,6 @@
-@import "../../../styles/variables";
-@import "../../../styles/responsive";
-@import "../../../styles/mixin";
+@import "styles/variables";
+@import "styles/responsive";
+@import "styles/mixin";
 .root {
   width: 100%;
   height: 100vh;
@@ -34,28 +34,87 @@
   .card-container {
     width: 100%;
 
-    .card-custom {
-      a {
-        ul {
-          li {
-            img {
-              height: auto;
-              width: 40px;
-            }
-            &:first-of-type {
-              width: 4%;
-            }
+    .product-list {
+      ul {
+        li {
+          width: 10%;
+          img {
+            height: auto;
+            width: 40px;
+          }
+          &:first-of-type {
+            width: 4%;
+          }
 
-            &:nth-of-type(3) {
-              width: 5%;
-            }
+          &:nth-of-type(3) {
+            width: 5%;
+          }
 
-            &:last-of-type {
-              width: 10%;
-            }
+          &:last-of-type {
+            width: 10%;
           }
         }
       }
+    }
+  }
+  .form {
+    @include formModal();
+    .container {
+      .column {
+        @include flex();
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 45%;
+        height: 400px;
+        column-gap: 7%;
+        &:first-of-type {
+          flex-wrap: wrap;
+          row-gap: 3%;
+        }
+        &:last-of-type {
+          .box {
+            height: auto;
+          }
+        }
+        .box {
+          width: 100%;
+          height: 90px;
+          &:nth-of-type(2),
+          &:nth-of-type(3) {
+            width: 40%;
+          }
+          .errMess {
+            bottom: 3px;
+          }
+        }
+      }
+    }
+  }
+}
+.upload-btn {
+  background-color: $button-bg;
+  color: $light-second;
+  @include light {
+    background-color: $light-second;
+    color: $light-component;
+    &:hover {
+      background-color: $light-primary;
+      color: $light-component;
+    }
+  }
+}
+
+.container-Img {
+  @include flex();
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 70%;
+  row-gap: 10px;
+  img {
+    width: 30%;
+    &:first-of-type {
+      width: 100%;
     }
   }
 }

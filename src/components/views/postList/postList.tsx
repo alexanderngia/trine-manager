@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "./postList.module.scss";
-import { Layout } from "../layout/layout";
-import { ButtonMain } from "../../ui/button/button";
-import CardList from "../../ui/card/cardList/cardList";
+import { ButtonMain } from "components/ui/button/button";
+import CardList from "components/ui/card/cardList/cardList";
+import { Layout } from "components/views/layout/layout";
+import React, { useEffect, useState } from "react";
 import { IoAdd, IoDownloadOutline } from "react-icons/io5";
+import styles from "./postList.module.scss";
 export interface ProductListProps {}
 
 const PostList: React.FC<ProductListProps> = (props) => {
@@ -31,11 +31,11 @@ const PostList: React.FC<ProductListProps> = (props) => {
       <div className={styles["root"]}>
         <h1>DANH SÁCH BÀI VIẾT</h1>
         <div className={styles["btn-container"]}>
-          <div className={styles["filter"]}>
+          {/* <div className={styles["filter"]}>
             <ButtonMain>LINGERIA</ButtonMain>
             <ButtonMain>ACCESSORIES</ButtonMain>
             <ButtonMain>DRESS</ButtonMain>
-          </div>
+          </div> */}
           <div className={styles["btnCrud"]}>
             <ButtonMain>
               <IoAdd className={styles["icon"]} />

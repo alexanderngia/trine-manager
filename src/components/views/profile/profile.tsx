@@ -1,6 +1,6 @@
 import React from "react";
 // import { Navigate } from "react-router-dom";
-import { useAppSelector } from "../../../hooks/useRedux";
+import { useAppSelector } from "hooks/useRedux";
 import styles from "./profile.module.scss";
 
 export interface ProfileProps {}

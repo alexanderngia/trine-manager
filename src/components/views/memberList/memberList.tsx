@@ -2,14 +2,14 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { IoAdd, IoDownloadOutline } from "react-icons/io5";
 import * as Yup from "yup";
-import { useAppDispatch, useAppSelector } from "../../../hooks/useRedux";
-import { register } from "../../../redux/reducers/authSlice";
-import { messageActions } from "../../../redux/reducers/messageSlice";
-import userService from "../../../services/userService";
-import { ButtonMain, ButtonSub } from "../../ui/button/button";
-import CardList from "../../ui/card/cardList/cardList";
-import { Modal } from "../../ui/modal/modal";
-import { Layout } from "../layout/layout";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import { register } from "redux/reducers/authSlice";
+import { messageActions } from "redux/reducers/messageSlice";
+import userService from "services/userService";
+import { ButtonMain, ButtonSub } from "components/ui/button/button";
+import CardList from "components/ui/card/cardList/cardList";
+import { Modal } from "components/ui/modal/modal";
+import { Layout } from "components/views/layout/layout";
 import styles from "./memberList.module.scss";
 
 export interface MemberListProps {}
@@ -57,7 +57,7 @@ const MemberList: React.FC<MemberListProps> = (props) => {
     if (modal) {
       setModal(true);
     }
-  }, [idUser, user]);
+  }, [idUser, data, user]);
 
   const openModal = () => {
     setModal(true);
@@ -455,11 +455,6 @@ const MemberList: React.FC<MemberListProps> = (props) => {
                         </li>
                         <li>{listItems.phoneUser}</li>
                         <li>{listItems.emailUser}</li>
-                        {/* <li>
-                          <IoCloseCircle
-                            onClick={() => deleteItem(listItems)}
-                          />
-                        </li> */}
                       </ul>
                     </CardList>
                   );

@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./orderList.module.scss";
-import { Layout } from "../layout/layout";
-import { ButtonMain } from "../../ui/button/button";
-import CardList from "../../ui/card/cardList/cardList";
-import {
-  IoAdd,
-  IoDownloadOutline,
-  IoRemoveCircleSharp,
-} from "react-icons/io5";
+import { Layout } from "components/views/layout/layout";
+import { ButtonMain } from "components/ui/button/button";
+import CardList from "components/ui/card/cardList/cardList";
+import { IoAdd, IoDownloadOutline, IoRemoveCircleSharp } from "react-icons/io5";
 export interface OrderListProps {}
 
 const OrderList: React.FC<OrderListProps> = (props) => {
