@@ -1,31 +1,44 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "./orderList.module.scss";
-import { Layout } from "components/views/layout/layout";
+import styles from "./index.module.scss";
+import { Layout } from "components/views/layout";
 import { ButtonMain } from "components/ui/button/button";
 import CardList from "components/ui/card/cardList/cardList";
 import { IoAdd, IoDownloadOutline, IoRemoveCircleSharp } from "react-icons/io5";
+import { useAppSelector } from "hooks/useRedux";
+import orderService from "services/orderService";
 export interface OrderListProps {}
 
 const OrderList: React.FC<OrderListProps> = (props) => {
   const [idOrder, setIdOder] = useState(`ALL`);
+  const [role, setRole] = useState("");
+  const [modal, setModal] = useState(false);
+
   const [data, setData] = useState([]);
+
+  const { user } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/api/order-list?id=${idOrder}`
-        );
+        const res = await orderService.getOrderBoard(idOrder);
         const resData = res.data.orders;
 
         setData(resData);
-      } catch (error) {
+        setRole(user.typeRole);
+      } catch (error: any) {
         console.log(error);
       }
     };
     fetchData();
-  }, [idOrder]);
+
+    const modal = localStorage.getItem("MODAL");
+    if (modal) {
+      setModal(true);
+    } else {
+      setModal(false);
+    }
+  }, [idOrder, data, user]);
   return (
     <Layout>
       <div className={styles["root"]}>

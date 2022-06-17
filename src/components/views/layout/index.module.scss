@@ -35,6 +35,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  width: 76%;
 }
 
 .main-container {
@@ -44,6 +45,9 @@
   flex-grow: 1;
   overflow: auto;
   color: $white;
+  @include light{
+    color: $light-second;
+  }
 }
 
 ::-webkit-scrollbar {

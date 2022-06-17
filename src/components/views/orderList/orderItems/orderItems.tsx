@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./orderItems.module.scss";
-import { Layout } from "components/views/layout/layout";
+import { Layout } from "components/views/layout";
 import { ButtonMain } from "components/ui/button/button";
 import CardList from "components/ui/card/cardList/cardList";
 import { IoAdd, IoDownloadOutline } from "react-icons/io5";

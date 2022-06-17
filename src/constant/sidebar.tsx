@@ -1,9 +1,9 @@
-import Dashboard from "../components/views/dashboard/dashboard";
-import ProductList from "../components/views/productList/productList";
-import OrderList from "../components/views/orderList/orderList";
-import CustomerList from "../components/views/customerList/customerList";
-import MemberList from "../components/views/memberList/memberList";
-import PostList from "../components/views/postList/postList";
+import Dashboard from "../components/views/dashboard";
+import ProductList from "../components/views/productList";
+import OrderList from "../components/views/orderList";
+import CustomerList from "../components/views/customerList";
+import MemberList from "../components/views/memberList";
+import PostList from "../components/views/postList";
 
 // export interface IMenuAdmin {
 //   id?: number;

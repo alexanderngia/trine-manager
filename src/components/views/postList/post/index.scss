@@ -1,0 +1,37 @@
+@import "styles/variables";
+@import "styles/responsive";
+@import "styles/mixin";
+
+.rc-md-editor {
+  width: 100%;
+  border: 0px;
+  background: $button-bg;
+  @include light {
+    background: $light-component;
+
+    .rc-md-navigation {
+      background: $light-component;
+    }
+    .editor-container .sec-md .input {
+      background: $light-component;
+      color: $light-second;
+    }
+    .custom-html-style {
+      color: $light-second;
+    }
+  }
+
+  .rc-md-navigation {
+    background: $button-bg;
+    border: 0px;
+  }
+  .editor-container .sec-md .input {
+    background: $button-bg;
+    color: $light-component;
+    border: 0px;
+  }
+
+  .custom-html-style {
+    color: $light-component;
+  }
+}

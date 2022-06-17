@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler } from "react";
 import { Moon, Sunny } from "react-ionicons";
-import "./darkMode.scss";
+import styles from "./index.module.scss";
 
 export interface DarkModeProps {}
 
@@ -40,19 +40,19 @@ const DarkMode: React.FC<DarkModeProps> = () => {
   };
   /* NEW (END) */
   return (
-    <div className={"root"}>
+    <div className={styles["root"]}>
       <input
         type="checkbox"
-        className={"checkbox"}
+        className={styles["checkbox"]}
         id="checkbox"
         onChange={toggleTheme}
         defaultChecked={defaultDark}
       />
-      <label htmlFor="checkbox" className={"label"}>
+      <label htmlFor="checkbox" className={styles["label"]}>
         <Moon color={"yellow"} height={"15px"} width={"15px"} />
         <Sunny color={"orange"} height={"15px"} width={"15px"} />
 
-        <span className={"ball"}></span>
+        <span className={styles["ball"]}></span>
       </label>
     </div>
   );

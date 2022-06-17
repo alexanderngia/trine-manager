@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import DarkMode from "./darkMode";
+import DarkMode from ".";
 
 // 1
 test("renders dark mode component", () => {

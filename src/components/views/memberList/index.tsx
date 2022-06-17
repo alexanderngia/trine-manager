@@ -9,8 +9,8 @@ import userService from "services/userService";
 import { ButtonMain, ButtonSub } from "components/ui/button/button";
 import CardList from "components/ui/card/cardList/cardList";
 import { Modal } from "components/ui/modal/modal";
-import { Layout } from "components/views/layout/layout";
-import styles from "./memberList.module.scss";
+import { Layout } from "components/views/layout";
+import styles from "./index.module.scss";
 
 export interface MemberListProps {}
 

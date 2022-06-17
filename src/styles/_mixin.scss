@@ -158,14 +158,17 @@
     .input {
       font-family: $font-p;
       outline: 0;
-      background: $white;
+      background: $button-bg;
       border: 0;
       padding: 15px;
       box-sizing: border-box;
       font-size: 14px;
       font-family: $font-number;
+      color: $light-component;
+
       @include light {
         background-color: $light-component;
+        color: $light-second;
         @include boxShadow();
         &::placeholder {
           color: rgba($light-black, 0.3);

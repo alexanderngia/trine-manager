@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./dashboard.module.scss";
-import { Layout } from "components/views/layout/layout";
+import styles from "./index.module.scss";
+import { Layout } from "components/views/layout";
 import { dataDB } from "constant/data";
 import CardTotal from "components/ui/card/cardTotal";
 

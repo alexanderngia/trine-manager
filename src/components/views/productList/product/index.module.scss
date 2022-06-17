@@ -1,0 +1,121 @@
+@import "styles/variables";
+@import "styles/responsive";
+@import "styles/mixin";
+.root {
+  width: 100%;
+  height: 100vh;
+  @include flex();
+  background-color: $theme-bg;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  @include light {
+    background-color: $ligth-theme-bg;
+  }
+  h1 {
+    @include Heading();
+    font-family: $font-p;
+    font-size: 1.5rem;
+    line-height: 50px;
+    padding: 2% 0%;
+    color: $light-component;
+    @include light {
+      color: $light-black;
+    }
+  }
+}
+.form {
+  width: 100%;
+  @include formModal();
+  .container {
+    flex-wrap: nowrap;
+    column-gap: 3%;
+    .column {
+      &:first-of-type {
+        width: 68%;
+        .row {
+          &:first-of-type {
+            .box {
+              width: 100%;
+              height: 100px;
+              &:first-of-type {
+                height: 50px;
+              }
+              &:nth-of-type(2) {
+                height: 70px;
+                @include flex();
+                flex-direction: row;
+                .label {
+                  margin-bottom: 0;
+                  font-weight: 600;
+                }
+                .input {
+                  font-size: 0.8rem;
+                  padding: 0px 15px;
+                  background-color: transparent;
+                  box-shadow: none;
+                  color: blue;
+                }
+              }
+
+              &:last-of-type {
+                height: 530px;
+              }
+            }
+          }
+          &:last-of-type {
+            @include flex();
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .box {
+              height: 100px;
+              width: 100%;
+              &:first-of-type,
+              &:nth-of-type(2) {
+                width: 18%;
+              }
+              &:nth-of-type(3) {
+                width: 53%;
+                .container-checkbox {
+                  display: flex;
+                  .checkbox {
+                    &:last-of-type {
+                      margin-right: 0;
+                    }
+                  }
+                }
+              }
+              &:nth-of-type(4) {
+                width: 100%;
+                height: 100px;
+              }
+              &:last-of-type {
+                width: 100%;
+                height: 120px;
+                .input {
+                  height: 80px;
+                }
+              }
+            }
+          }
+        }
+      }
+      &:last-of-type {
+        width: 30%;
+        .box {
+          width: 100%;
+          height: 100px;
+          &:first-of-type {
+            height: auto;
+          }
+        }
+        .button-container {
+          @include flex();
+          justify-content: flex-end;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "components/header/header";
 import Sidebar from "components/sidebar/sidebar";
-import styles from "./layout.module.scss";
+import styles from "./index.module.scss";
 export interface LayoutProps {
   children: any;
 }

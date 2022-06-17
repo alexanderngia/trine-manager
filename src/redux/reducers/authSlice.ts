@@ -8,14 +8,6 @@ export interface AuthState {
   user?: any | null;
 }
 
-// export interface IUserAction {
-//   user?: null | {
-//     fullNameUser?: string;
-//     emailUser?: string;
-//     typeRole?: string;
-//   };
-// }
-
 export interface IRegister {
   userName: string;
   userEmail: string;

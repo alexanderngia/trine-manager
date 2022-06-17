@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
-import styles from "./header.module.scss";
 import { menuUser } from "constant/profile";
-import { Navigate } from "react-router-dom";
-import { IoLogOut } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import React, { useEffect, useState } from "react";
+import { IoLogOut } from "react-icons/io5";
+import { Navigate } from "react-router-dom";
 import { authActions } from "redux/reducers/authSlice";
+import styles from "./header.module.scss";
 
 export interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = (props) => {
   const dispatch = useAppDispatch();
-  const { isLoggedIn } = useAppSelector((state) => state.auth);
   const { user } = useAppSelector((state) => state.auth);
 
   const [nameUser, setNameUser] = useState("");
@@ -22,7 +21,7 @@ const Header: React.FC<HeaderProps> = (props) => {
         setNameUser(user.fullNameUser);
       }
     }
-  }, [user]);
+  }, []);
 
   const openMenuProfile = () => {
     setProfile(!profile);
@@ -35,7 +34,6 @@ const Header: React.FC<HeaderProps> = (props) => {
   if (!user) {
     return <Navigate to="/" />;
   }
-
   return (
     <div className={styles["header"]}>
       <div className={styles["search-bar"]}>

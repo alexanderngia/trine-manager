@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { menuAdmin } from "constant/sidebar";
 import { useAppSelector } from "hooks/useRedux";
-import DarkMode from "components/ui/darkmode/darkMode";
+import DarkMode from "components/ui/darkmode";
 import styles from "./sidebar.module.scss";
 
 export interface SidebarProps {}
@@ -14,7 +14,9 @@ const Sidebar: React.FC<SidebarProps> = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    setRole(user.typeRole);
+    if (user) {
+      setRole(user.typeRole);
+    }
   }, []);
 
   const showSubNav = () => {

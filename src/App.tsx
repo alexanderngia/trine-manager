@@ -1,3 +1,5 @@
+import Post from "components/views/postList/post";
+import Product from "components/views/productList/product";
 import React from "react";
 import {
   Route,
@@ -19,6 +21,8 @@ function App() {
             return <Route path={route.path} element={route?.page} />;
           })
         )}
+        <Route path="/post" element={<Post />} />
+        <Route path="/product" element={<Product />} />
       </Routes>
     </HistoryRouter>
   );

@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { register } from "redux/reducers/authSlice";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { history } from "utils/history";
-import styles from "./register.module.scss";
+import styles from "./index.module.scss";
 import { messageActions } from "redux/reducers/messageSlice";
 interface RegisterProps {}
 
@@ -35,7 +35,7 @@ const Register: React.FC<RegisterProps> = (props) => {
     userEmail: Yup.string()
       .required("Required!")
       .matches(
-        /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+        /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/,
         "Please enter a valid email address!"
       ),
     userPass: Yup.string()
@@ -105,7 +105,6 @@ const Register: React.FC<RegisterProps> = (props) => {
         userName,
         userEmail,
         userPass,
-        confirmPass,
         userPhone,
         userGender,
         userAdress,

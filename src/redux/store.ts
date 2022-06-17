@@ -8,8 +8,10 @@ import { persistReducer } from "redux-persist";
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
-import authReducer from "./reducers/authSlice";
-import messageReducer from "./reducers/messageSlice";
+import authReducer from "redux/reducers/authSlice";
+import messageReducer from "redux/reducers/messageSlice";
+import postReducer from "redux/reducers/postSlice";
+import productReducer from "redux/reducers/productSlice";
 
 const persistConfig = {
   storage: storage,
@@ -18,13 +20,15 @@ const persistConfig = {
 const authPersistConfig = {
   ...persistConfig,
   key: "user",
-  whitelist: ["auth"],
+  // whitelist: ["auth, post"],
   blacklist: ["message"],
 };
 
 export const rootReducer = combineReducers({
   auth: authReducer,
   message: messageReducer,
+  post: postReducer,
+  product: productReducer,
 });
 
 export const persistedReducer = persistReducer<any, any>(
