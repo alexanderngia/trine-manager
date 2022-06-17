@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { menuAdmin } from "constant/sidebar";
+import { menuAdmin, menuSale } from "constant/sidebar";
 import { useAppSelector } from "hooks/useRedux";
 import DarkMode from "components/ui/darkmode";
 import styles from "./sidebar.module.scss";
@@ -17,7 +17,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
     if (user) {
       setRole(user.typeRole);
     }
-  }, []);
+  }, [user]);
 
   const showSubNav = () => {
     setSubNav(!subNav);
@@ -40,7 +40,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
 
         <ul className={styles["side-menu"]}>
           {React.Children.toArray(
-            menuAdmin.map((menu) => {
+            (role === "ADMIN" ? menuAdmin : menuSale).map((menu) => {
               return (
                 <li>
                   <NavLink
@@ -52,42 +52,8 @@ const Sidebar: React.FC<SidebarProps> = () => {
                       className={styles["icon"]}
                       dangerouslySetInnerHTML={{ __html: menu?.icon }}
                     />
-
                     <p>{menu.title}</p>
-
-                    {/* {menu.subMenu && (
-                      <span
-                        className={styles["sub-icon"]}
-                        dangerouslySetInnerHTML={{
-                          __html: subNav ? menu.downArr : menu.rightArr,
-                        }}
-                      ></span>
-                    )} */}
                   </NavLink>
-                  {/* {subNav &&
-                    React.Children.toArray(
-                      menu?.subMenu?.map((item: any) => {
-                        return (
-                          <ul>
-                            <li>
-                              <NavLink
-                                to={menu.path}
-                                className={styles["sub-link"]}
-                              >
-                                <span
-                                  className={styles["icon"]}
-                                  dangerouslySetInnerHTML={{
-                                    __html: item?.icon,
-                                  }}
-                                />
-
-                                <p>{item.title}</p>
-                              </NavLink>
-                            </li>
-                          </ul>
-                        );
-                      })
-                    )} */}
                 </li>
               );
             })

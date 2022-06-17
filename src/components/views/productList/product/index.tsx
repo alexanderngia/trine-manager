@@ -10,6 +10,7 @@ import PreviewImg from "../../../ui/image/previewImg";
 import styles from "./index.module.scss";
 import "./index.scss";
 import { ButtonSub } from "components/ui/button/button";
+import { history } from "utils/history";
 const { v4 } = require("uuid");
 const MarkdownIt = require("markdown-it");
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -19,7 +20,6 @@ export interface ProductProps {}
 const Product: React.FC<ProductProps> = () => {
   // const [deleteUser, setDeleteUser] = useState("");
   const { user } = useAppSelector((state) => state.auth);
-  const { message } = useAppSelector((state) => state.message);
   const { product } = useAppSelector((state) => state.product);
   const dispatch = useAppDispatch();
 
@@ -72,7 +72,6 @@ const Product: React.FC<ProductProps> = () => {
             descripTagItemNew: `${product.descripTagItem}`,
             authorItemNew: `${product.authorItem}`,
           });
-          // setDeleteUser(`${product}`);
           dispatch(messageActions.clearMessage());
         }
       } catch (error: any) {
@@ -80,7 +79,7 @@ const Product: React.FC<ProductProps> = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [dispatch, product]);
 
   const handleRegister = async (formValue: any, { resetForm }: any) => {
     const {
@@ -202,7 +201,8 @@ const Product: React.FC<ProductProps> = () => {
         }
         if (message) {
           dispatch(messageActions.clearMessage());
-          alert(deleteItem.nameItemNew + message);
+          await alert(deleteItem.nameItemNew + message);
+          history.push("/product-manager");
         }
       }
       if (confirmDelete === "" || null) {
@@ -534,13 +534,10 @@ const Product: React.FC<ProductProps> = () => {
                     <ButtonSub
                       type="button"
                       onClick={() => handleDeleteItem(values)}
-                      // onClick={() => console.log(values)}
                     >
-                      Xóa Thành Viên
+                      Delete
                     </ButtonSub>
-                    <button type="submit">
-                      {product ? "Cập Nhật" : "Thêm Sản Phẩm"}
-                    </button>
+                    <button type="submit">{product ? "UPDATE" : "ADD"}</button>
                   </div>
                 </span>
               </div>

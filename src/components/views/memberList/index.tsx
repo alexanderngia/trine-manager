@@ -46,7 +46,9 @@ const MemberList: React.FC<MemberListProps> = (props) => {
         const resData = res.data.users;
 
         setData(resData);
-        setRole(user.typeRole);
+        if (user) {
+          setRole(user.typeRole);
+        }
       } catch (error: any) {
         console.log(error);
       }

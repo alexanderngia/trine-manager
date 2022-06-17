@@ -6,10 +6,11 @@ import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 import { messageActions } from "redux/reducers/messageSlice";
 import postService from "services/postService";
-import PreviewImg from "../../../ui/image/previewImg";
+import PreviewImg from "components/ui/image/previewImg";
 import styles from "./index.module.scss";
 import "./index.scss";
-import * as Yup from "yup";
+import { ButtonSub } from "components/ui/button/button";
+import { history } from "utils/history";
 
 const MarkdownIt = require("markdown-it");
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -28,7 +29,7 @@ const Post: React.FC<PostProps> = () => {
 
   const [initialValue, setInitialValue] = useState({
     id: "",
-    authorNew: "",
+    authorNew: `${user.fullNameUser}`,
     urlNew: "",
     titleNew: "",
     bodyNew: "",
@@ -76,12 +77,7 @@ const Post: React.FC<PostProps> = () => {
       }
     };
     fetchData();
-  }, []);
-
-  const validationSchema = Yup.object().shape({
-    titleNew: Yup.string().required("Thiếu tiêu đề bài viết"),
-    bodyNew: Yup.string().required("Thiếu nội dung bài viết!"),
-  });
+  }, [dispatch, idPost, post]);
 
   const handleRegister = async (formValue: any, { resetForm }: any) => {
     const {
@@ -109,10 +105,17 @@ const Post: React.FC<PostProps> = () => {
         titleTagNew,
         descripTagNew,
       });
-      dispatch(messageActions.setMessage(res.data.message));
-      resetForm({});
+      const message = res.data.message;
+      const errMessage = res.data.errMessage;
+      if (errMessage) {
+        dispatch(messageActions.setMessage(errMessage));
+      }
+      if (message) {
+        await alert(`${message}`);
+        history.push("/post-manager");
+      }
 
-      return res.data;
+      // return res.data;
     } catch (error) {
       console.log(error);
     }
@@ -158,6 +161,34 @@ const Post: React.FC<PostProps> = () => {
       console.log(error);
     }
   };
+  const handleDeleteItem = async (deleteItem: any) => {
+    try {
+      let confirmDelete = prompt(
+        `Nhập DELETE vào ô để xác nhận xóa ${deleteItem.titleNew}!`,
+        ""
+      );
+      if (confirmDelete === "DELETE") {
+        let res = await postService.handleDeleteApi(deleteItem.id);
+        const errMessage = res.data.errMessage;
+        const message = res.data.message;
+        if (errMessage) {
+          dispatch(messageActions.setMessage(errMessage));
+        }
+        if (message) {
+          dispatch(messageActions.clearMessage());
+          await alert(deleteItem.titleNew + message);
+          history.push("/post-manager");
+        }
+      }
+      if (confirmDelete === "" || null) {
+        dispatch(
+          messageActions.setMessage(`Fail to remove ${deleteItem.titleNew}!`)
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Layout>
@@ -165,7 +196,6 @@ const Post: React.FC<PostProps> = () => {
         <h1>{post ? "CẬP NHẬT BÀI VIẾT" : "THÊM BÀI VIẾT"}</h1>
         <Formik
           initialValues={initialValue}
-          validationSchema={validationSchema}
           validateOnChange={true}
           onSubmit={post ? handleUpdate : handleRegister}
           // onSubmit={(values) => {
@@ -325,7 +355,13 @@ const Post: React.FC<PostProps> = () => {
                     />
                   </span>
                   <div className={styles["button-container"]}>
-                    <button type="submit">{post ? "Update" : "Publish"}</button>
+                    <ButtonSub
+                      type="button"
+                      onClick={() => handleDeleteItem(values)}
+                    >
+                      Delete
+                    </ButtonSub>
+                    <button type="submit">{post ? "Update" : "Save"}</button>
                   </div>
                 </span>
               </div>
