@@ -3,6 +3,7 @@
 @import "styles/mixin";
 
 .root {
+  width: 38px;
   height: 50px;
   @include flex();
   justify-content: flex-start;
@@ -15,8 +16,8 @@
 }
 
 .label {
-  width: 50px;
-  height: 26px;
+  width: 38px;
+  height: 19px;
   background-color: $button-bg;
   display: flex;
   border-radius: 50px;
@@ -38,8 +39,8 @@
 }
 
 .ball {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   background-color: white;
   position: absolute;
   top: 2px;
@@ -52,7 +53,7 @@
 /*  target the elemenent after the label*/
 
 .checkbox:checked + .label .ball {
-  transform: translateX(24px);
+  transform: translateX(19px);
 }
 
 .fa-moon {

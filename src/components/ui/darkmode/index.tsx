@@ -49,8 +49,8 @@ const DarkMode: React.FC<DarkModeProps> = () => {
         defaultChecked={defaultDark}
       />
       <label htmlFor="checkbox" className={styles["label"]}>
-        <Moon color={"yellow"} height={"15px"} width={"15px"} />
-        <Sunny color={"orange"} height={"15px"} width={"15px"} />
+        <Moon color={"yellow"} height={"10px"} width={"10px"} />
+        <Sunny color={"orange"} height={"10px"} width={"10px"} />
 
         <span className={styles["ball"]}></span>
       </label>
