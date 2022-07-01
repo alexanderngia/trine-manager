@@ -1,5 +1,5 @@
 import { ButtonMain } from "components/ui/button/button";
-import CardList from "components/ui/card/cardList/cardList";
+import { CardList } from "components/ui/card";
 import { Layout } from "components/views/layout";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import React, { useEffect, useState } from "react";
@@ -10,11 +10,13 @@ import productService from "services/productService";
 import { history } from "utils/history";
 import styles from "./index.module.scss";
 
+export interface IProduct {}
+
 export interface ProductListProps {}
 
-const ProductList: React.FC<ProductListProps> = (props) => {
-  const [idProduct, setIdProduct] = useState(`ALL`);
-  const [data, setData] = useState([]);
+const ProductList: React.FC<ProductListProps> = () => {
+  const [idProduct, setIdProduct] = useState<string | number>(`ALL`);
+  const [data, setData] = useState([] as IProduct[]);
   const [role, setRole] = useState("");
 
   const { user } = useAppSelector((state) => state.auth);
@@ -37,9 +39,7 @@ const ProductList: React.FC<ProductListProps> = (props) => {
       }
     };
     fetchData();
-  }, [idProduct, data, user]);
-
-
+  }, []);
 
   const openProduct = (product: any) => {
     dispatch(productActions.setProduct(product));
@@ -80,37 +80,13 @@ const ProductList: React.FC<ProductListProps> = (props) => {
                     <CardList
                       onClick={() => openProduct(listItems)}
                       className={styles["product-list"]}
-                    >
-                      <ul>
-                        <li>
-                          <div
-                            style={{
-                              backgroundImage: `url(${listItems.imgItem})`,
-                              backgroundPosition: `center`,
-                              backgroundRepeat: `no-repeat`,
-                              backgroundSize: `cover`,
-                              width: `50px`,
-                              height: `50px`,
-                              borderRadius: `50px`,
-                            }}
-                          ></div>
-                        </li>
-                        <li>{listItems.nameItem}</li>
-                        <li>{listItems.qualityItem}</li>
-                        <li>
-                          <div
-                            style={{
-                              backgroundColor: `${listItems.colorItem}`,
-                              width: `25px`,
-                              height: `25px`,
-                              borderRadius: `50px`,
-                            }}
-                          ></div>
-                        </li>
-                        <li>{listItems.sizeItem}</li>
-                        <li>{listItems.priceItem}</li>
-                      </ul>
-                    </CardList>
+                      titleCard={listItems.nameItem}
+                      imgCard={listItems.imgItem}
+                      qtyCard={listItems.qualityItem}
+                      colorCard={listItems.colorItem}
+                      sizeCard={listItems.sizeItem}
+                      priceCard={listItems.priceItem}
+                    />
                   );
                 })
               )}

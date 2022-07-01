@@ -223,9 +223,6 @@ const Product: React.FC<ProductProps> = () => {
           initialValues={initialValue}
           validateOnChange={true}
           onSubmit={product ? handleUpdate : handleRegister}
-          // onSubmit={(values) => {
-          //   console.log(values);
-          // }}
           enableReinitialize={true}
         >
           {({ values, setFieldValue }: any) => (
