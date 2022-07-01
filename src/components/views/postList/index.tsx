@@ -1,5 +1,5 @@
 import { ButtonMain } from "components/ui/button/button";
-import CardList from "components/ui/card/cardList/cardList";
+import { CardList } from "components/ui/card";
 import { Layout } from "components/views/layout";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import React, { useEffect, useState } from "react";
@@ -72,26 +72,11 @@ const PostList: React.FC<ProductListProps> = (props) => {
                     <CardList
                       onClick={() => openPost(listItems)}
                       className={styles["post-list"]}
-                    >
-                      <ul>
-                        <li>
-                          <div
-                            style={{
-                              backgroundImage: `url(${listItems.featureImg})`,
-                              backgroundPosition: `center`,
-                              backgroundRepeat: `no-repeat`,
-                              backgroundSize: `cover`,
-                              width: `50px`,
-                              height: `50px`,
-                              borderRadius: `50px`,
-                            }}
-                          ></div>
-                        </li>
-                        <li>{listItems.title}</li>
-                        <li>{listItems.author}</li>
-                        <li>{listItems.category}</li>
-                      </ul>
-                    </CardList>
+                      titleCard={listItems.title}
+                      imgCard={listItems.featureImg}
+                      textCardOne={listItems.author}
+                      textCardTwo={listItems.category}
+                    />
                   );
                 })
               )}
