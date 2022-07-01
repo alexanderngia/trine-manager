@@ -10,6 +10,7 @@ interface RegisterProps {}
 
 const Register: React.FC<RegisterProps> = (props) => {
   const [successful, setSuccessful] = useState(false);
+
   const { message } = useAppSelector((state) => state.message);
   const dispatch = useAppDispatch();
 
@@ -35,18 +36,10 @@ const Register: React.FC<RegisterProps> = (props) => {
     userEmail: Yup.string()
       .required("Required!")
       .matches(
-        /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+        /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
         "Please enter a valid email address!"
       ),
-    userPass: Yup.string()
-      .required("Required!")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-        "Minimum eight characters, at least one uppercase letter, one lowercase letter and one number"
-      ),
-    confirmedUserPass: Yup.string()
-      .required("Required!")
-      .oneOf([Yup.ref("userPass"), null], "Password must match!"),
+    userPass: Yup.string().required("Required!"),
     userPhone: Yup.string()
       .required("Required!")
       .matches(
@@ -57,60 +50,18 @@ const Register: React.FC<RegisterProps> = (props) => {
     userAdress: Yup.string().required("Required!"),
     userRole: Yup.string().required("Required!"),
   });
-  // const [userName, setUserName] = useState("");
-  // const [userEmail, setUserEmail] = useState("");
-  // const [userPass, setUserPass] = useState("");
-  // const [userPhone, setUserPhone] = useState("");
-  // const [userGender, setUserGender] = useState("");
-  // const [userAdress, setUserAdress] = useState("");
-  // const [userRole, setUserRole] = useState("");
 
-  // const [errMessage, setErrMessage] = useState("");
-
-  // const dispatch = useAppDispatch();
-
-  // const handleLogin = async (e: { preventDefault: () => void }) => {
-  //   e.preventDefault();
-  //   setErrMessage("");
-
-  //   try {
-  //     let data: any = await authService.handleLoginApi(userEmail, userPass);
-
-  //     // Success Login
-  //     if (data && data.errCode === 0) {
-  //       setErrMessage(data.message);
-  //       // dispatch(authActions.loginSuccess(data.user));
-  //       localStorage.setItem("ACCESS_TOKEN", "TRUE");
-  //       history.push("/dashboard");
-  //     }
-  //     // Fail Login
-  //     if (data && data.errCode !== 0) {
-  //       setErrMessage(data.message);
-  //       // dispatch(authActions.loginFail());
-  //     }
-  //   } catch (error: any) {
-  //     if (error.response) {
-  //       if (error.response.data) {
-  //         setErrMessage(error.response.data.message);
-  //       }
-  //     }
-  //   }
-  // };
-  // const handleSubmit = (e: any) => {
-  //   e.preventDefault();
-  // };
-  const handleRegister = (formValue: any) => {
+  const handleRegister = (formValue: any, { resetForm }: any) => {
+    const {
+      userName,
+      userEmail,
+      userPass,
+      userPhone,
+      userGender,
+      userAdress,
+      userRole,
+    } = formValue;
     try {
-      const {
-        userName,
-        userEmail,
-        userPass,
-        userPhone,
-        userGender,
-        userAdress,
-        userRole,
-      } = formValue;
-      setSuccessful(false);
       dispatch(
         register({
           userName,
@@ -122,9 +73,8 @@ const Register: React.FC<RegisterProps> = (props) => {
           userRole,
         })
       );
-      setSuccessful(true);
+      resetForm({});
     } catch (error) {
-      setSuccessful(false);
       console.log(error);
     }
   };
@@ -140,12 +90,16 @@ const Register: React.FC<RegisterProps> = (props) => {
         >
           {({ values, handleChange }: any) => (
             <Form className={styles["form"]}>
-              {!successful && (
-                <div className={styles["login-form"]}>
+              <div className={styles["container"]}>
+                <span className={styles["box"]}>
+                  <label htmlFor="userName" className={styles["label"]}>
+                    Full Name
+                  </label>
                   <Field
+                    id="userName"
                     className={styles["input"]}
                     type="text"
-                    placeholder="Enter your fullname"
+                    placeholder="Nguyễn Văn A"
                     name="userName"
                     value={values.userName}
                     onChange={(e: any) => handleChange(e)}
@@ -155,12 +109,18 @@ const Register: React.FC<RegisterProps> = (props) => {
                     name="userName"
                     component="div"
                   />
+                </span>
+                <span className={styles["box"]}>
+                  <label htmlFor="userEmail" className={styles["label"]}>
+                    Email
+                  </label>
 
                   <Field
                     className={styles["input"]}
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder="nguyenvana@gmail.com"
                     name="userEmail"
+                    id="userEmail"
                     value={values.userEmail}
                     onChange={(e: any) => handleChange(e)}
                   />
@@ -169,12 +129,18 @@ const Register: React.FC<RegisterProps> = (props) => {
                     name="userEmail"
                     component="div"
                   />
+                </span>
+                <span className={styles["box"]}>
+                  <label htmlFor="userPass" className={styles["label"]}>
+                    Mật Khẩu
+                  </label>
 
                   <Field
                     className={styles["input"]}
                     type="password"
-                    placeholder="Enter your password"
+                    placeholder="abc1223@"
                     name="userPass"
+                    id="userPass"
                     value={values.userPass}
                     onChange={(e: any) => handleChange(e)}
                   />
@@ -183,25 +149,18 @@ const Register: React.FC<RegisterProps> = (props) => {
                     name="userPass"
                     component="div"
                   />
-                  <Field
-                    className={styles["input"]}
-                    type="password"
-                    placeholder="Confirm your password"
-                    name="confirmPass"
-                    value={values.confirmPass}
-                    onChange={(e: any) => handleChange(e)}
-                  />
-                  <ErrorMessage
-                    className={styles["errMess"]}
-                    name="confirmPass"
-                    component="div"
-                  />
+                </span>
+                <span className={styles["box"]}>
+                  <label htmlFor="userPhone" className={styles["label"]}>
+                    Phone
+                  </label>
 
                   <Field
                     className={styles["input"]}
                     type="phone"
-                    placeholder="Enter your phone"
+                    placeholder="0988379379"
                     name="userPhone"
+                    id="userPhone"
                     value={values.userPhone}
                     onChange={(e: any) => handleChange(e)}
                   />
@@ -210,28 +169,17 @@ const Register: React.FC<RegisterProps> = (props) => {
                     name="userPhone"
                     component="div"
                   />
-                  <Field
-                    className={styles["select"]}
-                    id="gender"
-                    name="userGender"
-                    component="select"
-                    value={values.userGender}
-                    onChange={(e: any) => handleChange(e)}
-                  >
-                    <option value="1">Male</option>
-                    <option value="0">Female</option>
-                  </Field>
-                  <ErrorMessage
-                    className={styles["errMess"]}
-                    name="userGender"
-                    component="div"
-                  />
-
+                </span>
+                <span className={styles["box"]}>
+                  <label htmlFor="userAdress" className={styles["label"]}>
+                    Địa Chỉ
+                  </label>
                   <Field
                     className={styles["input"]}
                     type="text"
-                    placeholder="Enter your address"
+                    placeholder="100C Hậu Giang Quận 6 TP.HCM"
                     name="userAdress"
+                    id="userAdress"
                     value={values.userAdress}
                     onChange={(e: any) => handleChange(e)}
                   />
@@ -240,44 +188,81 @@ const Register: React.FC<RegisterProps> = (props) => {
                     name="userAdress"
                     component="div"
                   />
+                </span>
+                <span className={styles["box"]}>
+                  <p>Giới Tính</p>
+                  <div className={styles["container-checkbox"]}>
+                    <label htmlFor="Male" className={styles["checkbox"]}>
+                      <Field
+                        type="radio"
+                        id="Male"
+                        name="userGender"
+                        value="1"
+                      ></Field>
+                      <span>
+                        <p>Male</p>
+                      </span>
+                    </label>
+                    <label htmlFor="Female" className={styles["checkbox"]}>
+                      <Field
+                        type="radio"
+                        id="Female"
+                        name="userGender"
+                        value="0"
+                      ></Field>
+                      <span>
+                        <p>Female</p>
+                      </span>
+                    </label>
+                    <ErrorMessage
+                      className={styles["errMess"]}
+                      name="userGender"
+                      component="div"
+                    />
+                  </div>
+                </span>
+                <span className={styles["box"]}>
+                  <p>Vai Trò</p>
+                  <div className={styles["container-checkbox"]}>
+                    <label htmlFor="Admin" className={styles["checkbox"]}>
+                      <Field
+                        type="radio"
+                        id="Admin"
+                        name="userRole"
+                        value="ADMIN"
+                      ></Field>
+                      <span>
+                        <p>Admin</p>
+                      </span>
+                    </label>
+                    <label htmlFor="Sale" className={styles["checkbox"]}>
+                      <Field
+                        type="radio"
+                        id="Sale"
+                        name="userRole"
+                        value="SALE"
+                      ></Field>
+                      <span>
+                        <p>Sale</p>
+                      </span>
+                    </label>
+                    <ErrorMessage
+                      className={styles["errMess"]}
+                      name="userRole"
+                      component="div"
+                    />
+                  </div>
+                </span>
+              </div>
+              <p className={styles["message"]}>{message}</p>
 
-                  <Field
-                    className={styles["select"]}
-                    id="role"
-                    name="userRole"
-                    component="select"
-                    value={values.userRole}
-                    onChange={(e: any) => handleChange(e)}
-                  >
-                    <option value="1">Admin</option>
-                    <option value="2">Sale</option>
-                  </Field>
-                  <ErrorMessage
-                    className={styles["errMess"]}
-                    name="userRole"
-                    component="div"
-                  />
-
-                  {/* <p className={styles["errMessage"]}>{errMessage}</p> */}
-                  <button type="submit">Signup</button>
-                </div>
-              )}
+              <div className={styles["button-container"]}>
+                <button type="submit">Tạo Thành Viên</button>
+              </div>
             </Form>
           )}
         </Formik>
       </div>
-      {message && (
-        <div className="form-group">
-          <div
-            className={
-              successful ? "alert alert-success" : "alert alert-danger"
-            }
-            role="alert"
-          >
-            {message}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -1,18 +1,21 @@
 import Login from "components/views/auth/login";
 import Register from "components/views/auth/register";
-import { useAppSelector } from "hooks/useRedux";
-import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import { messageActions } from "redux/reducers/messageSlice";
 import styles from "./index.module.scss";
 
 interface AuthenticationProps {}
 
 const Authentication: React.FC<AuthenticationProps> = (props) => {
-  const [signin, setSingin] = useState(true);
+  const [signin, setSignin] = useState(false);
   const { user } = useAppSelector((state) => state.auth);
-
-  const toggle = () => {
-    setSingin(!signin);
+  const { message } = useAppSelector((state) => state.message);
+  const dispatch = useAppDispatch();
+  const toggle = (e: any) => {
+    setSignin(!signin);
+    dispatch(messageActions.clearMessage());
   };
 
   if (user) {
@@ -24,7 +27,7 @@ const Authentication: React.FC<AuthenticationProps> = (props) => {
 
   return (
     <div className={styles["root"]}>
-      {signin ? <Login /> : <Register />}
+      {signin ? <Register /> : <Login />}
 
       <div className={styles["toggle"]}>
         <p>Đăng Nhập</p>
@@ -34,6 +37,7 @@ const Authentication: React.FC<AuthenticationProps> = (props) => {
             className={styles["checkbox"]}
             id="checkbox"
             onClick={toggle}
+            defaultChecked={signin}
           />
           <label htmlFor="checkbox" className={styles["label"]}>
             <span className={styles["ball"]}></span>
