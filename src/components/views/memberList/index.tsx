@@ -7,7 +7,7 @@ import { register } from "redux/reducers/authSlice";
 import { messageActions } from "redux/reducers/messageSlice";
 import userService from "services/userService";
 import { ButtonMain, ButtonSub } from "components/ui/button/button";
-import CardList from "components/ui/card/cardList/cardList";
+import { CardList } from "components/ui/card";
 import { Modal } from "components/ui/modal/modal";
 import { Layout } from "components/views/layout";
 import styles from "./index.module.scss";
@@ -59,7 +59,7 @@ const MemberList: React.FC<MemberListProps> = (props) => {
     if (modal) {
       setModal(true);
     }
-  }, [idUser, data, user]);
+  }, []);
 
   const openModal = () => {
     setModal(true);
@@ -449,16 +449,14 @@ const MemberList: React.FC<MemberListProps> = (props) => {
               {React.Children.toArray(
                 data.map((listItems: any) => {
                   return (
-                    <CardList onClick={() => openItemModal(listItems)}>
-                      <ul>
-                        <li>{listItems.fullNameUser}</li>
-                        <li>
-                          {listItems.genderUser === 1 ? "Male" : "Female"}
-                        </li>
-                        <li>{listItems.phoneUser}</li>
-                        <li>{listItems.emailUser}</li>
-                      </ul>
-                    </CardList>
+                    <CardList
+                      className={styles["customer-list"]}
+                      onClick={() => openItemModal(listItems)}
+                      titleCard={listItems.fullNameUser}
+                      qtyCard={listItems.genderUser === 1 ? "Male" : "Female"}
+                      sizeCard={listItems.phoneUser}
+                      priceCard={listItems.emailUser}
+                    />
                   );
                 })
               )}

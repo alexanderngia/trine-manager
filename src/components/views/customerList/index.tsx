@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { messageActions } from "redux/reducers/messageSlice";
 import customerService from "services/customerService";
 import { ButtonMain, ButtonSub } from "components/ui/button/button";
-import CardList from "components/ui/card/cardList/cardList";
+import { CardList } from "components/ui/card";
 import { Modal } from "components/ui/modal/modal";
 import { Layout } from "components/views/layout";
 import styles from "./index.module.scss";
@@ -342,14 +342,11 @@ const CustomerList: React.FC<CustomerListProps> = (props) => {
                     <CardList
                       className={styles["customer-list"]}
                       onClick={() => openItemModal(listItems)}
-                    >
-                      <ul>
-                        <li>{listItems.fullNameCus}</li>
-                        <li>{listItems.genderCus === 1 ? "Male" : "Female"}</li>
-                        <li>{listItems.phoneCus}</li>
-                        <li>{listItems.emailCus}</li>
-                      </ul>
-                    </CardList>
+                      titleCard={listItems.fullNameCus}
+                      qtyCard={listItems.genderCus === 1 ? "Male" : "Female"}
+                      sizeCard={listItems.phoneCus}
+                      priceCard={listItems.emailCus}
+                    />
                   );
                 })
               )}
