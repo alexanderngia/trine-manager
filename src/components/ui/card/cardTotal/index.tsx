@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./cardTotal.module.scss";
+import styles from "./index.module.scss";
 export interface CardTotalProps {
   title: string;
   total: string;

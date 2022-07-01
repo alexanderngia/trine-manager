@@ -1,0 +1,152 @@
+@import "styles/variables";
+@import "styles/responsive";
+@import "styles/mixin";
+
+.root {
+  @include Text();
+  padding: 1%;
+  font-family: $font-number;
+  font-size: 0.8rem;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  transition: 0.2s all ease-in;
+  cursor: pointer;
+  background-color: $button-bg;
+  color: $light-component;
+  width: 100%;
+  list-style: none;
+
+  @include light {
+    box-shadow: 0px 0px 10px rgba($light-second, 0.1);
+    background-color: $light-component;
+    color: $light-second;
+    &:hover {
+      transform: scale(1.03);
+      background-color: $light-primary;
+      color: $light-component;
+    }
+  }
+  @include dark {
+    &:hover {
+      transform: scale(1.03);
+      color: $light-component;
+      &:nth-child(2n + 1) {
+        background: #ff7551;
+      }
+      &:nth-child(2n) {
+        background: #32a7e2;
+      }
+      &:nth-child(2n + 3) {
+        background: #6c5ecf;
+      }
+    }
+  }
+  &-card {
+    width: 22%;
+  }
+  .card {
+    @include flex();
+    justify-content: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+
+    .img {
+      width: 100%;
+    }
+    .title {
+      font-weight: 600;
+      font-size: 0.6rem;
+    }
+    li {
+      text-align: left;
+      font-size: 0.5rem;
+      width: 100%;
+      margin-bottom: 8px;
+      &:nth-of-type(3) {
+        width: 55%;
+      }
+      &:nth-of-type(4),
+      &:nth-of-type(5),
+      &:last-of-type {
+        width: 15%;
+        margin-bottom: 0px;
+      }
+    }
+    &-list {
+      @include flex();
+      justify-content: space-between;
+      width: 100%;
+      li {
+        width: 15%;
+        &:nth-of-type(2) {
+          width: 7%;
+        }
+        &:nth-of-type(3) {
+          width: 15%;
+        }
+        &:last-of-type {
+          width: 2%;
+        }
+      }
+    }
+    &-item {
+      @include flex();
+      justify-content: flex-start;
+      width: 100%;
+      padding: 1.5%;
+      .img {
+        .inner {
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          width: 50px;
+          height: 50px;
+          border-radius: 5px;
+        }
+      }
+      .column {
+        @include flex();
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        padding-left: 20px;
+        width: 60%;
+
+        li {
+          width: 100%;
+          h3 {
+            font-weight: 700;
+          }
+          &:nth-of-type(2),
+          &:nth-of-type(3),
+          &:nth-of-type(4) {
+            color: rgba($light-second, 0.6);
+            width: 20%;
+            @include dark {
+              color: rgba($light-component, 0.6);
+            }
+          }
+        }
+        .pad-color {
+          width: fit-content;
+          height: fit-content;
+          padding: 2px;
+          border-radius: 50px;
+          background-color: rgba($light-component, 0.6);
+          @include light {
+            @include boxShadow();
+          }
+          .color {
+            width: 8px;
+            height: 8px;
+            border-radius: 25px;
+          }
+        }
+      }
+      .price {
+        width: 30%;
+        text-align: right;
+      }
+    }
+  }
+}
