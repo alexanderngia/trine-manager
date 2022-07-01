@@ -36,9 +36,9 @@ const Header: React.FC<HeaderProps> = (props) => {
   }
   return (
     <div className={styles["header"]}>
-      <div className={styles["search-bar"]}>
+      {/* <div className={styles["search-bar"]}>
         <input type="text" placeholder="Search" />
-      </div>
+      </div> */}
       <div className={styles["user-settings"]}>
         <ul>
           <li className={styles["user-profile"]} onClick={openMenuProfile}>
