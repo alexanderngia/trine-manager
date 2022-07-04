@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { register } from "redux/reducers/authSlice";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
-import { history } from "utils/history";
-import styles from "./index.module.scss";
+import React, { useEffect } from "react";
+import { register } from "redux/reducers/authSlice";
 import { messageActions } from "redux/reducers/messageSlice";
+import * as Yup from "yup";
+import styles from "./index.module.scss";
 interface RegisterProps {}
 
 const Register: React.FC<RegisterProps> = (props) => {
-  const [successful, setSuccessful] = useState(false);
 
   const { message } = useAppSelector((state) => state.message);
   const dispatch = useAppDispatch();

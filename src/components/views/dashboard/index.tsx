@@ -6,7 +6,7 @@ import CardTotal from "components/ui/card/cardTotal";
 
 export interface DashboardProps {}
 
-const Dashboard: React.FC<DashboardProps> = (props) => {
+const DashBoard: React.FC<DashboardProps> = (props) => {
   return (
     <Layout>
       <div className={styles["root"]}>
@@ -28,4 +28,4 @@ const Dashboard: React.FC<DashboardProps> = (props) => {
   );
 };
 
-export default Dashboard;
+export default DashBoard;

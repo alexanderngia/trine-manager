@@ -1,8 +1,8 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useEffect } from "react";
-import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import React from "react";
 import { login } from "redux/reducers/authSlice";
+import * as Yup from "yup";
 import styles from "./index.module.scss";
 
 interface LoginProps {}

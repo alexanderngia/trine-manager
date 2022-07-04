@@ -1,7 +1,7 @@
 import Login from "components/views/auth/login";
 import Register from "components/views/auth/register";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { messageActions } from "redux/reducers/messageSlice";
 import styles from "./index.module.scss";
@@ -11,7 +11,6 @@ interface AuthenticationProps {}
 const Authentication: React.FC<AuthenticationProps> = (props) => {
   const [signin, setSignin] = useState(false);
   const { user } = useAppSelector((state) => state.auth);
-  const { message } = useAppSelector((state) => state.message);
   const dispatch = useAppDispatch();
   const toggle = (e: any) => {
     setSignin(!signin);

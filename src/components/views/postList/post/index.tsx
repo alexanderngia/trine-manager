@@ -1,5 +1,5 @@
 import { Layout } from "components/views/layout";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik, useFormikContext } from "formik";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import React, { useEffect, useState } from "react";
 import MdEditor from "react-markdown-editor-lite";
@@ -17,11 +17,36 @@ const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 export interface PostProps {}
 
+// const CustomField = () => {
+//   const {
+//     values: { titleNew },
+//     touched,
+//     setFieldValue,
+//   } = useFormikContext();
+
+//   return (
+//     <>
+//       <Field
+//         className={styles["input"]}
+//         type="text"
+//         name="urlNew"
+//         value={values.titleNew
+//           .replaceAll(" ", "-")
+//           .normalize("NFD")
+//           .replace(/[\u0300-\u036f]/g, "")
+//           .replace(/đ/g, "d")
+//           .replace(/Đ/g, "D")
+//           .toLowerCase()}
+//         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+//           setFieldValue("urlNew", `${e.target.value}`);
+//         }}
+//         id="urlNew"
+//       />
+//     </>
+//   );
+// };
+
 const Post: React.FC<PostProps> = () => {
-  const [data, setData] = useState([]);
-
-  const [idPost, setIdPost] = useState(`ALL`);
-
   const { user } = useAppSelector((state) => state.auth);
   const { message } = useAppSelector((state) => state.message);
   const { post } = useAppSelector((state) => state.post);
@@ -44,10 +69,6 @@ const Post: React.FC<PostProps> = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await postService.getPostBoard(idPost);
-        const resData = res.data.posts;
-
-        setData(resData);
         if (post) {
           const urlPost = post.title
             .replaceAll(" ", "-")
@@ -77,7 +98,7 @@ const Post: React.FC<PostProps> = () => {
       }
     };
     fetchData();
-  }, [dispatch, idPost, post]);
+  }, [dispatch, post]);
 
   const handleRegister = async (formValue: any, { resetForm }: any) => {
     const {
@@ -189,6 +210,21 @@ const Post: React.FC<PostProps> = () => {
       console.log(error);
     }
   };
+  const customOnchange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setFieldValue: any
+  ) => {
+    setFieldValue(
+      "urlNew",
+      e.target.value
+        .replaceAll(" ", "-")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/đ/g, "d")
+        .replace(/Đ/g, "D")
+        .toLowerCase()
+    );
+  };
 
   return (
     <Layout>
@@ -203,7 +239,7 @@ const Post: React.FC<PostProps> = () => {
           // }}
           enableReinitialize={true}
         >
-          {({ values, setFieldValue }: any) => (
+          {({ values, setFieldValue, handleChange }: any) => (
             <Form className={styles["form"]}>
               <div className={styles["container"]}>
                 <span className={styles["column"]}>
@@ -228,6 +264,10 @@ const Post: React.FC<PostProps> = () => {
                       type="text"
                       placeholder="TIÊU ĐỀ"
                       name="titleNew"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        handleChange(e);
+                        customOnchange(e, setFieldValue);
+                      }}
                     />
                     <ErrorMessage
                       className={styles["errMess"]}
@@ -243,6 +283,13 @@ const Post: React.FC<PostProps> = () => {
                       className={styles["input"]}
                       type="text"
                       name="urlNew"
+                      value={values.titleNew
+                        .replaceAll(" ", "-")
+                        .normalize("NFD")
+                        .replace(/[\u0300-\u036f]/g, "")
+                        .replace(/đ/g, "d")
+                        .replace(/Đ/g, "D")
+                        .toLowerCase()}
                       id="urlNew"
                     />
                   </span>
@@ -375,3 +422,6 @@ const Post: React.FC<PostProps> = () => {
 };
 
 export default Post;
+function setFieldValue(arg0: string, value: string) {
+  throw new Error("Function not implemented.");
+}
