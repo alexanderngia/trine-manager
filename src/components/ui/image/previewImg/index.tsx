@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-import styles from "./index.module.scss";
-import { Storage } from "firebaseAuth";
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { ButtonMain } from "components/ui/button/button";
-const { v4 } = require("uuid");
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { Storage } from "firebaseAuth";
+import React, { useEffect, useState } from "react";
+import styles from "./index.module.scss";
 
 export interface PreviewImgProps {}
 
