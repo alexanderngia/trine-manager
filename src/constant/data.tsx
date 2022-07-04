@@ -1,21 +1,23 @@
+import { CartFill } from "@styled-icons/bootstrap/CartFill";
+
 export const dataDB = [
   {
-    icon: `<ion-icon name="cart"></ion-icon>`,
+    icon: <CartFill size={30} />,
     total: "12,512",
     title: "Total Order",
   },
   {
-    icon: `<ion-icon name="cube"/></ion-icon>`,
+    icon: <CartFill size={30} />,
     total: "25,512",
     title: "Total Sales",
   },
   {
-    icon: `<ion-icon name="logo-usd"/></ion-icon>`,
+    icon: <CartFill size={30} />,
     total: "$8,512",
     title: "Income",
   },
   {
-    icon: `<ion-icon name="person"/></ion-icon>`,
+    icon: <CartFill size={30} />,
     total: "12,512",
     title: "Customer",
   },

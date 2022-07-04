@@ -1,8 +1,10 @@
+import { UserCircle } from "@styled-icons/fa-solid/UserCircle";
+
 export const menuUser = [
   {
     title: "Profile",
     path: "/member-profile",
-    icon: `<ion-icon name="person"/></ion-icon>`,
+    icon: <UserCircle />,
   },
   // {
   //   title: "Đăng Xuất",

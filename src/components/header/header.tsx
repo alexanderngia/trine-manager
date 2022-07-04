@@ -1,7 +1,7 @@
 import { menuUser } from "constant/profile";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import React, { useEffect, useState } from "react";
-import { IoLogOut } from "react-icons/io5";
+import { LogOut } from "@styled-icons/evaicons-solid/LogOut";
 import { Navigate } from "react-router-dom";
 import { authActions } from "redux/reducers/authSlice";
 import styles from "./header.module.scss";
@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = (props) => {
         setNameUser(user.fullNameUser);
       }
     }
-  }, []);
+  }, [user]);
 
   const openMenuProfile = () => {
     setProfile(!profile);
@@ -63,10 +63,9 @@ const Header: React.FC<HeaderProps> = (props) => {
                       return (
                         <li>
                           <a href={profile.path}>
-                            <span
-                              className={styles["icon"]}
-                              dangerouslySetInnerHTML={{ __html: profile.icon }}
-                            />
+                            <span className={styles["icon"]}>
+                              {profile.icon}
+                            </span>
                             <p>{profile.title}</p>
                           </a>
                         </li>
@@ -75,7 +74,7 @@ const Header: React.FC<HeaderProps> = (props) => {
                   )}
                   <li>
                     <div className={styles["logout"]} onClick={logOut}>
-                      <IoLogOut className={styles["icon"]} />
+                      <LogOut className={styles["icon"]} />
                       <p>Đăng Xuất</p>
                     </div>
                   </li>

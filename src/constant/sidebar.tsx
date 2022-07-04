@@ -1,24 +1,29 @@
-import Dashboard from "components/views/dashboard";
+import DashBoard from "components/views/dashboard";
 import ProductList from "components/views/productList";
 import OrderList from "components/views/orderList";
 import CustomerList from "components/views/customerList";
 import MemberList from "components/views/memberList";
 import PostList from "components/views/postList";
-
+import { Dashboard } from "@styled-icons/boxicons-solid/Dashboard";
+import { FileEarmarkRichtextFill } from "@styled-icons/bootstrap/FileEarmarkRichtextFill";
+import { Storefront } from "@styled-icons/ionicons-sharp/Storefront";
+import { CartFill } from "@styled-icons/bootstrap/CartFill";
+import { CustomerService } from "@styled-icons/remix-fill/CustomerService";
+import { User } from "@styled-icons/boxicons-solid/User";
 export const menuAdmin = [
   {
     id: 1,
     title: "Tổng Quan",
     path: "/dashboard",
-    page: <Dashboard />,
-    icon: `<ion-icon name="home"/></ion-icon>`,
+    page: <DashBoard />,
+    icon: <Dashboard />,
   },
   {
     id: 2,
     title: "Quản Lí Bài Viết",
     path: "/post-manager",
     page: <PostList />,
-    icon: `<ion-icon name="document-text"></ion-icon>`,
+    icon: <FileEarmarkRichtextFill />,
     rightArr: `<ion-icon name="chevron-forward"></ion-icon>`,
     downArr: `<ion-icon name="chevron-down"></ion-icon>`,
     subMenu: [
@@ -35,7 +40,7 @@ export const menuAdmin = [
     title: "Quản Lí Sản Phẩm",
     path: "/product-manager",
     page: <ProductList />,
-    icon: `<ion-icon name="storefront"></ion-icon>`,
+    icon: <Storefront />,
     rightArr: `<ion-icon name="chevron-forward"></ion-icon>`,
     downArr: `<ion-icon name="chevron-down"></ion-icon>`,
     subMenu: [
@@ -52,7 +57,7 @@ export const menuAdmin = [
     title: "Quản Lí Đơn Hàng",
     path: "/order-manager",
     page: <OrderList />,
-    icon: `<ion-icon name="bag"/></ion-icon>`,
+    icon: <CartFill />,
     rightArr: `<ion-icon name="chevron-forward"></ion-icon>`,
     downArr: `<ion-icon name="chevron-down"></ion-icon>`,
     subMenu: [
@@ -69,7 +74,7 @@ export const menuAdmin = [
     title: "Quản Lí Khách Hàng",
     path: "/customer-manager",
     page: <CustomerList />,
-    icon: `<ion-icon name="person"/></ion-icon>`,
+    icon: <CustomerService />,
     rightArr: `<ion-icon name="chevron-forward"></ion-icon>`,
     downArr: `<ion-icon name="chevron-down"></ion-icon>`,
     subMenu: [
@@ -86,7 +91,7 @@ export const menuAdmin = [
     title: "Quản Lí Thành Viên",
     path: "/member-manager",
     page: <MemberList />,
-    icon: `<ion-icon name="people-circle"/></ion-icon>`,
+    icon: <User />,
     rightArr: `<ion-icon name="chevron-forward"></ion-icon>`,
     downArr: `<ion-icon name="chevron-down"></ion-icon>`,
 
@@ -107,14 +112,14 @@ export const menuSale = [
     title: "Tổng Quan",
     path: "/dashboard",
     page: <Dashboard />,
-    icon: `<ion-icon name="home"/></ion-icon>`,
+    // icon: <SunFill />,
   },
   {
     id: 2,
     title: "Quản Lí Bài Viết",
     path: "/post-manager",
     page: <PostList />,
-    icon: `<ion-icon name="document-text"></ion-icon>`,
+    icon: <FileEarmarkRichtextFill />,
     rightArr: `<ion-icon name="chevron-forward"></ion-icon>`,
     downArr: `<ion-icon name="chevron-down"></ion-icon>`,
     subMenu: [
@@ -131,7 +136,7 @@ export const menuSale = [
     title: "Quản Lí Sản Phẩm",
     path: "/product-manager",
     page: <ProductList />,
-    icon: `<ion-icon name="storefront"></ion-icon>`,
+    icon: <Storefront />,
     rightArr: `<ion-icon name="chevron-forward"></ion-icon>`,
     downArr: `<ion-icon name="chevron-down"></ion-icon>`,
     subMenu: [
@@ -148,7 +153,7 @@ export const menuSale = [
     title: "Quản Lí Đơn Hàng",
     path: "/order-manager",
     page: <OrderList />,
-    icon: `<ion-icon name="bag"/></ion-icon>`,
+    icon: <CartFill />,
     rightArr: `<ion-icon name="chevron-forward"></ion-icon>`,
     downArr: `<ion-icon name="chevron-down"></ion-icon>`,
     subMenu: [

@@ -48,10 +48,11 @@ const Sidebar: React.FC<SidebarProps> = () => {
                     onClick={menu.subMenu && showSubNav}
                     className={navLinkClass}
                   >
-                    <span
+                    {/* <span
                       className={styles["icon"]}
                       dangerouslySetInnerHTML={{ __html: menu?.icon }}
-                    />
+                    /> */}
+                    <span className={styles["icon"]}> {menu?.icon}</span>
                     <p>{menu.title}</p>
                   </NavLink>
                 </li>
