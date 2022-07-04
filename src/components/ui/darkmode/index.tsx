@@ -1,5 +1,6 @@
 import React, { ChangeEventHandler } from "react";
-import { Moon, Sunny } from "react-ionicons";
+import { SunFill } from "@styled-icons/bootstrap/SunFill";
+import { WeatherMoon } from "@styled-icons/fluentui-system-filled/WeatherMoon";
 import styles from "./index.module.scss";
 
 export interface DarkModeProps {}
@@ -49,8 +50,8 @@ const DarkMode: React.FC<DarkModeProps> = () => {
         defaultChecked={defaultDark}
       />
       <label htmlFor="checkbox" className={styles["label"]}>
-        <Moon color={"yellow"} height={"10px"} width={"10px"} />
-        <Sunny color={"orange"} height={"10px"} width={"10px"} />
+        <WeatherMoon color={"yellow"} size={"10px"} />
+        <SunFill color={"orange"} size={"10px"} />
 
         <span className={styles["ball"]}></span>
       </label>

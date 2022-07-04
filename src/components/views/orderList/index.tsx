@@ -1,44 +1,47 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import styles from "./index.module.scss";
 import { Layout } from "components/views/layout";
 import { ButtonMain } from "components/ui/button/button";
-import CardList from "components/ui/card/cardList/cardList";
-import { IoAdd, IoDownloadOutline, IoRemoveCircleSharp } from "react-icons/io5";
-import { useAppSelector } from "hooks/useRedux";
+import { Card } from "components/ui/card";
+import { Plus } from "@styled-icons/boxicons-regular/Plus";
+import { Download } from "@styled-icons/bootstrap/Download";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import orderService from "services/orderService";
+import { orderActions } from "redux/reducers/orderSlice";
+import { history } from "utils/history";
 export interface OrderListProps {}
 
 const OrderList: React.FC<OrderListProps> = (props) => {
-  const [idOrder, setIdOder] = useState(`ALL`);
   const [role, setRole] = useState("");
-  const [modal, setModal] = useState(false);
-
   const [data, setData] = useState([]);
 
   const { user } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await orderService.getOrderBoard(idOrder);
+        const res = await orderService.getOrderBoard("ALL");
         const resData = res.data.orders;
 
         setData(resData);
-        setRole(user.typeRole);
       } catch (error: any) {
         console.log(error);
       }
     };
     fetchData();
+  }, []);
 
-    const modal = localStorage.getItem("MODAL");
-    if (modal) {
-      setModal(true);
-    } else {
-      setModal(false);
+  useEffect(() => {
+    if (user) {
+      setRole(user.typeRole);
     }
-  }, [idOrder, data, user]);
+  }, [user]);
+
+  const handleAddOrder = () => {
+    dispatch(orderActions.clearOrder());
+    history.push("/order");
+  };
   return (
     <Layout>
       <div className={styles["root"]}>
@@ -50,12 +53,14 @@ const OrderList: React.FC<OrderListProps> = (props) => {
             <ButtonMain>DONE</ButtonMain>
           </div>
           <div className={styles["btnCrud"]}>
-            <ButtonMain>
-              <IoAdd className={styles["icon"]} />
+            <ButtonMain onClick={handleAddOrder}>
+              <Plus size={20} className={styles["icon"]} />
             </ButtonMain>
-            <ButtonMain>
-              <IoDownloadOutline className={styles["icon"]} />
-            </ButtonMain>
+            {role === "ADMIN" && (
+              <ButtonMain>
+                <Download size={20} className={styles["icon"]} />
+              </ButtonMain>
+            )}
           </div>
         </div>
         {data.length > 0 && (
@@ -63,21 +68,15 @@ const OrderList: React.FC<OrderListProps> = (props) => {
             {React.Children.toArray(
               data.map((listItems: any) => {
                 return (
-                  <CardList className={styles["card-custom"]}>
-                    <a href="/#">
-                      <ul>
-                        <li>{listItems.id}</li>
-                        <li>{listItems.fullNameCustomer}</li>
-                        <li>{listItems.phoneCustomer}</li>
-                        <li>{listItems.statusShipping}</li>
-                        <li>{listItems.adressShipping}</li>
-                        <li>{listItems.priceShipping}</li>
-                        <li>
-                          <IoRemoveCircleSharp />
-                        </li>
-                      </ul>
-                    </a>
-                  </CardList>
+                  <Card
+                    className={styles["card-custom"]}
+                    // onClick={() => openItemModal(listItems)}
+                    titleCard={listItems.fullNameCustomer}
+                    textCardOne={listItems.phoneCustomer}
+                    textCardTwo={listItems.statusShipping}
+                    textCardThree={listItems.adressShipping}
+                    textCardFour={listItems.priceShipping}
+                  />
                 );
               })
             )}

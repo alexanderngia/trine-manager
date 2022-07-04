@@ -3,7 +3,8 @@ import { CardList } from "components/ui/card";
 import { Layout } from "components/views/layout";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import React, { useEffect, useState } from "react";
-import { IoAdd, IoDownloadOutline } from "react-icons/io5";
+import { Plus } from "@styled-icons/boxicons-regular/Plus";
+import { Download } from "@styled-icons/bootstrap/Download";
 import { postActions } from "redux/reducers/postSlice";
 import postService from "services/postService";
 import { history } from "utils/history";
@@ -12,7 +13,6 @@ import styles from "./index.module.scss";
 export interface ProductListProps {}
 
 const PostList: React.FC<ProductListProps> = (props) => {
-  const [idPost, setIdPost] = useState(`ALL`);
   const [data, setData] = useState([]);
   const [role, setRole] = useState("");
   const { user } = useAppSelector((state) => state.auth);
@@ -21,19 +21,22 @@ const PostList: React.FC<ProductListProps> = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await postService.getPostBoard(idPost);
+        const res = await postService.getPostBoard("ALL");
         const resData = res.data.posts;
 
         setData(resData);
-        if (user) {
-          setRole(user.typeRole);
-        }
       } catch (error: any) {
         console.log(error);
       }
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      setRole(user.typeRole);
+    }
+  }, [user]);
 
   const openPost = (post: any) => {
     dispatch(postActions.setPost(post));
@@ -55,12 +58,13 @@ const PostList: React.FC<ProductListProps> = (props) => {
           </div>
           <div className={styles["btnCrud"]}>
             <ButtonMain onClick={handleAddPost}>
-              <IoAdd className={styles["icon"]} />
+              <Plus size={20} className={styles["icon"]} />
             </ButtonMain>
-
-            <ButtonMain>
-              <IoDownloadOutline className={styles["icon"]} />
-            </ButtonMain>
+            {role === "ADMIN" && (
+              <ButtonMain>
+                <Download size={20} className={styles["icon"]} />
+              </ButtonMain>
+            )}
           </div>
         </div>
         {data.length > 0 && (

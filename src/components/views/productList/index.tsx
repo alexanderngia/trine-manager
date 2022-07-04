@@ -1,10 +1,10 @@
+import { Download } from "@styled-icons/bootstrap/Download";
+import { Plus } from "@styled-icons/boxicons-regular/Plus";
 import { ButtonMain } from "components/ui/button/button";
 import { CardList } from "components/ui/card";
 import { Layout } from "components/views/layout";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import React, { useEffect, useState } from "react";
-import { IoAdd, IoDownloadOutline } from "react-icons/io5";
-import { messageActions } from "redux/reducers/messageSlice";
 import { productActions } from "redux/reducers/productSlice";
 import productService from "services/productService";
 import { history } from "utils/history";
@@ -15,31 +15,32 @@ export interface IProduct {}
 export interface ProductListProps {}
 
 const ProductList: React.FC<ProductListProps> = () => {
-  const [idProduct, setIdProduct] = useState<string | number>(`ALL`);
   const [data, setData] = useState([] as IProduct[]);
   const [role, setRole] = useState("");
 
   const { user } = useAppSelector((state) => state.auth);
-  const { product } = useAppSelector((state) => state.product);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await productService.getProductBoard(idProduct);
+        const res = await productService.getProductBoard("ALL");
         const resData = res.data.products;
 
         setData(resData);
-        if (user) {
-          setRole(user.typeRole);
-        }
       } catch (error: any) {
         console.log(error);
       }
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      setRole(user.typeRole);
+    }
+  }, [user]);
 
   const openProduct = (product: any) => {
     dispatch(productActions.setProduct(product));
@@ -62,11 +63,11 @@ const ProductList: React.FC<ProductListProps> = () => {
           </div>
           <div className={styles["btnCrud"]}>
             <ButtonMain onClick={handleAddProduct}>
-              <IoAdd className={styles["icon"]} />
+              <Plus size={20} className={styles["icon"]} />
             </ButtonMain>
             {role === "ADMIN" && (
               <ButtonMain>
-                <IoDownloadOutline className={styles["icon"]} />
+                <Download size={20} className={styles["icon"]} />
               </ButtonMain>
             )}
           </div>

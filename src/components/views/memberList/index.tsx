@@ -1,6 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import { IoAdd, IoDownloadOutline } from "react-icons/io5";
+import { Plus } from "@styled-icons/boxicons-regular/Plus";
+import { Download } from "@styled-icons/bootstrap/Download";
 import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { register } from "redux/reducers/authSlice";
@@ -15,7 +16,6 @@ import styles from "./index.module.scss";
 export interface MemberListProps {}
 
 const MemberList: React.FC<MemberListProps> = (props) => {
-  const [idUser, setIdUser] = useState(`ALL`);
   const [deleteUser, setDeleteUser] = useState([]);
   const [data, setData] = useState([]);
 
@@ -42,13 +42,10 @@ const MemberList: React.FC<MemberListProps> = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await userService.getUserBoard(idUser);
+        const res = await userService.getUserBoard("ALL");
         const resData = res.data.users;
 
         setData(resData);
-        if (user) {
-          setRole(user.typeRole);
-        }
       } catch (error: any) {
         console.log(error);
       }
@@ -60,6 +57,11 @@ const MemberList: React.FC<MemberListProps> = (props) => {
       setModal(true);
     }
   }, []);
+  useEffect(() => {
+    if (user) {
+      setRole(user.typeRole);
+    }
+  }, [user]);
 
   const openModal = () => {
     setModal(true);
@@ -251,10 +253,10 @@ const MemberList: React.FC<MemberListProps> = (props) => {
         {role === "ADMIN" && (
           <div className={styles["btn-container"]}>
             <ButtonMain onClick={openModal}>
-              <IoAdd className={styles["icon"]} />
+              <Plus size={20} className={styles["icon"]} />
             </ButtonMain>
             <ButtonMain>
-              <IoDownloadOutline className={styles["icon"]} />
+              <Download size={20} className={styles["icon"]} />
             </ButtonMain>
           </div>
         )}

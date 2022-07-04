@@ -1,6 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import { IoAdd, IoDownloadOutline } from "react-icons/io5";
+import { Plus } from "@styled-icons/boxicons-regular/Plus";
+import { Download } from "@styled-icons/bootstrap/Download";
 import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { messageActions } from "redux/reducers/messageSlice";
@@ -14,7 +15,6 @@ import styles from "./index.module.scss";
 export interface CustomerListProps {}
 
 const CustomerList: React.FC<CustomerListProps> = (props) => {
-  const [idCus, setIdCus] = useState(`ALL`);
   const [data, setData] = useState([]);
   const [role, setRole] = useState("");
   const [modal, setModal] = useState(false);
@@ -38,11 +38,10 @@ const CustomerList: React.FC<CustomerListProps> = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await customerService.getCustomerBoard(idCus);
+        const res = await customerService.getCustomerBoard("ALL");
         const resData = res.data.customers;
 
         setData(resData);
-        setRole(user.typeRole);
       } catch (error: any) {
         console.log(error);
       }
@@ -52,7 +51,13 @@ const CustomerList: React.FC<CustomerListProps> = (props) => {
     if (modal) {
       setModal(true);
     }
-  }, [idCus, data, user]);
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      setRole(user.typeRole);
+    }
+  }, [user]);
 
   const openModal = () => {
     setModal(true);
@@ -193,11 +198,11 @@ const CustomerList: React.FC<CustomerListProps> = (props) => {
         <h1>DANH SÁCH KHÁCH HÀNG</h1>
         <div className={styles["btn-container"]}>
           <ButtonMain onClick={openModal}>
-            <IoAdd className={styles["icon"]} />
+            <Plus size={20} className={styles["icon"]} />
           </ButtonMain>
           {role === "ADMIN" && (
             <ButtonMain>
-              <IoDownloadOutline className={styles["icon"]} />
+              <Download size={20} className={styles["icon"]} />
             </ButtonMain>
           )}
         </div>
