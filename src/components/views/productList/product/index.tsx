@@ -46,19 +46,11 @@ const Product: React.FC<ProductProps> = () => {
     const fetchData = async () => {
       try {
         if (product) {
-          const urlProduct = product.nameItem
-            .replaceAll(" ", "-")
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/đ/g, "d")
-            .replace(/Đ/g, "D")
-            .toLowerCase();
-
           setInitialValue({
             id: `${product.id}`,
             idItemNew: `${product.idItem}`,
             imgItemNew: `${product.imgItem}`,
-            urlItemNew: `${urlProduct}`,
+            urlItemNew: `${product.urlItem}`,
             nameItemNew: `${product.nameItem}`,
             bodyItemNew: `${product.bodyItem}`,
             bodyHtmlItemNew: `${product.bodyHtmlItem}`,
@@ -275,6 +267,13 @@ const Product: React.FC<ProductProps> = () => {
                         className={styles["input"]}
                         type="text"
                         name="urlItemNew"
+                        value={values.nameItemNew
+                          .replaceAll(" ", "-")
+                          .normalize("NFD")
+                          .replace(/[\u0300-\u036f]/g, "")
+                          .replace(/đ/g, "d")
+                          .replace(/Đ/g, "D")
+                          .toLowerCase()}
                         id="urlItemNew"
                       />
                     </span>
