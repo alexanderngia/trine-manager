@@ -12,6 +12,8 @@ import authReducer from "redux/reducers/authSlice";
 import messageReducer from "redux/reducers/messageSlice";
 import postReducer from "redux/reducers/postSlice";
 import productReducer from "redux/reducers/productSlice";
+import orderReducer from "redux/reducers/orderSlice";
+import cartReducer from "./reducers/cartSlice";
 
 const persistConfig = {
   storage: storage,
@@ -29,6 +31,8 @@ export const rootReducer = combineReducers({
   message: messageReducer,
   post: postReducer,
   product: productReducer,
+  order: orderReducer,
+  cart: cartReducer,
 });
 
 export const persistedReducer = persistReducer<any, any>(
