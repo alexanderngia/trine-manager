@@ -17,35 +17,6 @@ const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 export interface PostProps {}
 
-// const CustomField = () => {
-//   const {
-//     values: { titleNew },
-//     touched,
-//     setFieldValue,
-//   } = useFormikContext();
-
-//   return (
-//     <>
-//       <Field
-//         className={styles["input"]}
-//         type="text"
-//         name="urlNew"
-//         value={values.titleNew
-//           .replaceAll(" ", "-")
-//           .normalize("NFD")
-//           .replace(/[\u0300-\u036f]/g, "")
-//           .replace(/đ/g, "d")
-//           .replace(/Đ/g, "D")
-//           .toLowerCase()}
-//         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-//           setFieldValue("urlNew", `${e.target.value}`);
-//         }}
-//         id="urlNew"
-//       />
-//     </>
-//   );
-// };
-
 const Post: React.FC<PostProps> = () => {
   const { user } = useAppSelector((state) => state.auth);
   const { message } = useAppSelector((state) => state.message);
@@ -72,6 +43,11 @@ const Post: React.FC<PostProps> = () => {
         if (post) {
           const urlPost = post.title
             .replaceAll(" ", "-")
+            .replaceAll(",", "")
+            .replaceAll(".", "")
+            .replaceAll("?", "")
+            .replaceAll("!", "")
+            .replaceAll(":", "")
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
             .replace(/đ/g, "d")
@@ -218,6 +194,11 @@ const Post: React.FC<PostProps> = () => {
       "urlNew",
       e.target.value
         .replaceAll(" ", "-")
+        .replaceAll(",", "")
+        .replaceAll(".", "")
+        .replaceAll("?", "")
+        .replaceAll("!", "")
+        .replaceAll(":", "")
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/đ/g, "d")
@@ -285,6 +266,11 @@ const Post: React.FC<PostProps> = () => {
                       name="urlNew"
                       value={values.titleNew
                         .replaceAll(" ", "-")
+                        .replaceAll(",", "")
+                        .replaceAll(".", "")
+                        .replaceAll("?", "")
+                        .replaceAll("!", "")
+                        .replaceAll(":", "")
                         .normalize("NFD")
                         .replace(/[\u0300-\u036f]/g, "")
                         .replace(/đ/g, "d")

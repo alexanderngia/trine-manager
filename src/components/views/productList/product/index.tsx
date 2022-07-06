@@ -46,11 +46,23 @@ const Product: React.FC<ProductProps> = () => {
     const fetchData = async () => {
       try {
         if (product) {
+          const urlProduct = product.nameItem
+            .replaceAll(" ", "-")
+            .replaceAll(",", "")
+            .replaceAll(".", "")
+            .replaceAll("?", "")
+            .replaceAll("!", "")
+            .replaceAll(":", "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/đ/g, "d")
+            .replace(/Đ/g, "D")
+            .toLowerCase();
           setInitialValue({
             id: `${product.id}`,
             idItemNew: `${product.idItem}`,
             imgItemNew: `${product.imgItem}`,
-            urlItemNew: `${product.urlItem}`,
+            urlItemNew: `${urlProduct}`,
             nameItemNew: `${product.nameItem}`,
             bodyItemNew: `${product.bodyItem}`,
             bodyHtmlItemNew: `${product.bodyHtmlItem}`,
@@ -207,6 +219,27 @@ const Product: React.FC<ProductProps> = () => {
     }
   };
 
+  const customOnchange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setFieldValue: any
+  ) => {
+    setFieldValue(
+      "urlItemNew",
+      e.target.value
+        .replaceAll(" ", "-")
+        .replaceAll(",", "")
+        .replaceAll(".", "")
+        .replaceAll("?", "")
+        .replaceAll("!", "")
+        .replaceAll(":", "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/đ/g, "d")
+        .replace(/Đ/g, "D")
+        .toLowerCase()
+    );
+  };
+
   return (
     <Layout>
       <div className={styles["root"]}>
@@ -217,7 +250,7 @@ const Product: React.FC<ProductProps> = () => {
           onSubmit={product ? handleUpdate : handleRegister}
           enableReinitialize={true}
         >
-          {({ values, setFieldValue }: any) => (
+          {({ values, setFieldValue, handleChange }: any) => (
             <Form className={styles["form"]}>
               <div className={styles["container"]}>
                 <span className={styles["column"]}>
@@ -252,6 +285,10 @@ const Product: React.FC<ProductProps> = () => {
                         type="text"
                         placeholder="TÊN SẢN PHẨM"
                         name="nameItemNew"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                          handleChange(e);
+                          customOnchange(e, setFieldValue);
+                        }}
                       />
                       <ErrorMessage
                         className={styles["errMess"]}
@@ -269,6 +306,11 @@ const Product: React.FC<ProductProps> = () => {
                         name="urlItemNew"
                         value={values.nameItemNew
                           .replaceAll(" ", "-")
+                          .replaceAll(",", "")
+                          .replaceAll(".", "")
+                          .replaceAll("?", "")
+                          .replaceAll("!", "")
+                          .replaceAll(":", "")
                           .normalize("NFD")
                           .replace(/[\u0300-\u036f]/g, "")
                           .replace(/đ/g, "d")
@@ -546,3 +588,6 @@ const Product: React.FC<ProductProps> = () => {
 };
 
 export default Product;
+function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  throw new Error("Function not implemented.");
+}
